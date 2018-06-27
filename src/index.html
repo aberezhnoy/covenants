@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Covenants Editor Tool</title>
+</head>
+<body>
+    <section id="index"></section>
+
+    <script id="covenant" type="text/x-jsrender">
+        <div class="ui-component covenant">
+            <div>
+                <div>Name: <input type="text" name="name" /></div>
+                <div>Type: <select></select></div>
+            </div>
+            <div class="components"></div>
+            <div class="my-cls">
+                <button class="btn-add-component">add component</button>
+            </div>
+        </div>
+    </script>
+
+    <script id="component" type="text/x-jsrender">
+        <div class="ui-component component" style="margin-left: 20px; background-color: yellow;">
+            <div>
+                <div>Code: <input type="text" name="code" /></div>
+                <div>Name: <input type="text" name="name" /></div>
+            </div>
+            <div class="values">value here</div>
+        </div>
+    </script>
+</body>
+</html>

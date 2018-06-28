@@ -17,6 +17,10 @@ class Covenant {
             let newComponent = new Component("", "", "REQUIRED");
             _this.addComponent(newComponent);
         });
+
+        this.rootElement.find("[name=to-output]").click(() => {
+            $("#output").val(JSON.stringify(this.toStore(), null, 2));
+        });
     }
 
     toElement() {
@@ -24,8 +28,15 @@ class Covenant {
     }
 
     toStore() {
+        let components = [];
+
+        this.components.forEach((component) => {
+            components.push(component.toStore());
+        });
+
         return {
-            name: this.name
+            name: this.name,
+            components: components
         };
     }
 

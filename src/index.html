@@ -9,7 +9,11 @@
 <body>
     <section id="index"></section>
 
-    <script id="covenant" type="text/x-jsrender">
+    <textarea id="output">
+
+    </textarea>
+
+    <script id="covenant" type="text/html">
         <div class="ui-component covenant">
             <div>
                 <div>Name: <input type="text" name="name" /></div>
@@ -19,16 +23,30 @@
             <div class="my-cls">
                 <button class="btn-add-component">add component</button>
             </div>
+            <button name="to-output">Print</button>
         </div>
     </script>
 
-    <script id="component" type="text/x-jsrender">
+    <script id="component" type="text/html">
         <div class="ui-component component" style="margin-left: 20px; background-color: yellow;">
             <div>
                 <div>Code: <input type="text" name="code" /></div>
                 <div>Name: <input type="text" name="name" /></div>
             </div>
-            <div class="values">value here</div>
+            <div class="values"></div>
+            <div class="my-cls">
+                <button class="btn-add-value">add value</button>
+                <select name="valueType">
+                    <option value="static">Static</option>
+                </select>
+            </div>
+        </div>
+    </script>
+
+    <script id="value-static" type="text/html">
+        <div class="ui-component value-static" style="margin-left: 20px; background-color: blanchedalmond;">
+            <div>Code: <input type="text" name="code" /></div>
+            <div>Value: <input type="text" name="value" /></div>
         </div>
     </script>
 </body>

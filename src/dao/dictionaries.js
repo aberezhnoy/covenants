@@ -1,4 +1,4 @@
-import { Dictionary } from "../dao/dictionary-model";
+import { Dictionary } from "../models/dictionary";
 import SystemDictionary from "../resources/system";
 import Currency from "../resources/currency";
 import Covenants from "../resources/covenants"

@@ -1,11 +1,12 @@
 import $ from "jquery";
+import { TemplateValueAttributesCollection } from "../../models/template-value";
 
 const template = $("#template-editor").text();
 const itemTemplate = $("#template-editor").text();
 
 class TemplateEditor {
     constructor() {
-        this.values = [];
+        this.model = new TemplateValueAttributesCollection();
         this.rootElement = $(template);
         this.valuesElement = this.rootElement.find(".template-editor-values");
     }
@@ -19,7 +20,7 @@ class TemplateEditor {
     }
 
     toStore() {
-        return this.values;
+        return this.model.toJSON();
     }
 
     fromStore(data) {
@@ -27,7 +28,7 @@ class TemplateEditor {
             throw "Store must be an array";
         }
 
-        this.values = data;
+        this.model.set(data);
     }
 
     _render() {

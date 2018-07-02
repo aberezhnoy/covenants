@@ -1,0 +1,16 @@
+{
+  "required": [
+    {
+      "title": "Required",
+      "value": "REQUIRED"
+    },
+    {
+      "title": "Partially required",
+      "value": "PARTIALLY_REQUIRED"
+    },
+    {
+      "title": "Not required",
+      "value": "NOT_REQUIRED"
+    }
+  ]
+}

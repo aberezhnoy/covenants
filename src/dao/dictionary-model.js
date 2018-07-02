@@ -1,6 +1,10 @@
-import { Model, Collection } from 'backbone';
+import { Model, Collection } from "backbone";
 
 class DictItem extends Model {
+    get idAttribute() {
+        return "value";
+    }
+
     defaults() {
         return {
             title: "",
@@ -9,13 +13,11 @@ class DictItem extends Model {
     }
 }
 
-export default DictItem;
-
-class MyDict1 extends Collection {
+class Dictionary extends Collection {
     constructor(options) {
         super(options);
         this.model = DictItem;
     }
 }
 
-export { MyDict1 };
+export { Dictionary, DictItem };

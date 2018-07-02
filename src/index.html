@@ -8,22 +8,25 @@
 </head>
 <body>
     <section id="index"></section>
-
-    <textarea id="output">
-
-    </textarea>
+    <hr/>
+    <section id="tmpl-editor"></section>
+    <hr/>
+    <textarea id="output" style="width: 500px; height: 300px;"></textarea>
+    <button id="to-output">Print</button>
+    <hr/>
 
     <script id="covenant" type="text/html">
         <div class="ui-component covenant">
             <div>
+                <div>Code: <input type="text" name="code" /></div>
                 <div>Name: <input type="text" name="name" /></div>
-                <div>Type: <select></select></div>
+                <div>Type: <select name="type"></select></div>
+                <div>Required: <select name="required"></select></div>
             </div>
             <div class="components"></div>
             <div class="my-cls">
                 <button class="btn-add-component">add component</button>
             </div>
-            <button name="to-output">Print</button>
         </div>
     </script>
 
@@ -36,36 +39,63 @@
             <div class="values"></div>
             <div class="my-cls">
                 <button class="btn-add-value">add value</button>
-                <select name="valueType">
-                    <option value="static">Static</option>
-                </select>
+                <select name="valueType"></select>
+            </div>
+            <div>
+                <button class="remove">X</button>
             </div>
         </div>
     </script>
 
+    <!-- component values -->
+
     <script id="value-static" type="text/html">
         <div class="ui-component value-static" style="margin-left: 20px; background-color: blanchedalmond;">
             <div>Code: <input type="text" name="code" /></div>
-            <div>Value: <input type="text" name="value" /></div>
+            <div>Name: <input type="text" name="name" /></div>
+            <div><button class="remove">X</button></div>
         </div>
     </script>
 
     <script id="value-template" type="text/html">
         <div class="ui-component value-template" style="margin-left: 20px; background-color: cadetblue;">
-
+            <div>Code: <input type="text" name="code" /></div>
+            <div>Name: <input type="text" name="name" /></div>
+            <div>Template: <input type="text" name="template" /></div>
+            <div>
+                <button class="show-template-editor">template editor</button>
+                <button class="remove">X</button>
+            </div>
         </div>
     </script>
 
-    <script id="template-editor" type="text/html">
+    <!-- template editor -->
 
+    <script id="template-editor" type="text/html">
+        <div class="ui-component template-editor" style="margin-left: 5px; background-color: coral;">
+            <table>
+                <tbody class="template-editor-values"></tbody>
+            </table>
+            <div>
+                <button class="add-value">add</button>
+                <select class="value-type"></select>
+            </div>
+        </div>
     </script>
 
     <script id="template-editor-item" type="text/html">
-
+        <tr>
+            <td><input type="text" class="item-key" /></td>
+            <td class="item-value"></td>
+        </tr>
     </script>
 
-    <script id="template-editor-value-static" type="text/html">
+    <!-- template values -->
 
+    <script id="template-editor-value-static" type="text/html">
+        <div>
+            <input type="text" class="template-editor-static-value" />
+        </div>
     </script>
 
     <script id="template-editor-value-amount" type="text/html">

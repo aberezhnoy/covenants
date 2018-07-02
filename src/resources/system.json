@@ -1,0 +1,27 @@
+{
+  "valueTypes": [
+    {
+      "title": "Static",
+      "value": "static"
+    },
+    {
+      "title": "Template",
+      "value": "template"
+    }
+  ],
+
+  "templateValueTypes": [
+    {
+      "title": "Text",
+      "value": "TEXT"
+    },
+    {
+      "title": "Percentage",
+      "value": "PERCENTAGE"
+    },
+    {
+      "title": "Amount",
+      "value": "AMOUNT"
+    }
+  ]
+}

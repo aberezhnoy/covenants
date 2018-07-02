@@ -1,6 +1,7 @@
 [
   {
     "name": "Ограничение заимствований / предоставления поручительств и ГО",
+    "code": "cov1",
     "conditionType": "FINANCIAL_COVENANT",
     "required": "REQUIRED", // REQUIRED, NOT_REQUIRED, PARTYALLLY_REQUIRED
     "lifeCycle": {},

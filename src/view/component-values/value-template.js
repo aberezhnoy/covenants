@@ -1,16 +1,16 @@
 import $ from "jquery";
-import TemplateValueModel from "../../models/template-value";
+import { TemplateValueModel } from "../../models/attribute-value";
 import GlobalEvents from "../../events";
 import {bindDictionary, bindInputValue, unbindDictionary} from "../../input-data-bind";
 import { TemplateValueTypesDict } from "../../dao/dictionaries";
-import { templateEditorInst } from "../template-editor/editor";
+import { attributeEditorInst } from "../attribute-editor/editor";
 
 const template = $("#value-template").text();
 
 class ValueTemplate {
     constructor() {
         this.model = new TemplateValueModel();
-        this.templateValues = [];
+        //this.templateValues = [];
         this.parent = null;
 
         this.rootElement = $(template);
@@ -24,8 +24,11 @@ class ValueTemplate {
         bindInputValue(this.nameElement, this.model, "name");
         bindInputValue(this.templateElement, this.model, "template");
 
-        this.rootElement.find(".show-template-editor").click(() => {
-            // TODO: show template editor
+        this.rootElement.find(".show-attribute-editor").click(() => {
+            attributeEditorInst.setDoneCallback(() => {
+                const attrs = attributeEditorInst.toStore();
+                this.model.set("attributes", attrs);
+            });
         });
 
         this.rootElement.find(".remove").click(() => {
@@ -44,10 +47,6 @@ class ValueTemplate {
     }
 
     toStore() {
-        this.model.set(
-            "defaultValues",
-            this.templateValues.map(templateValue => templateValue.toStore()));
-
         return this.model.toJSON();
     }
 

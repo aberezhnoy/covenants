@@ -47,7 +47,7 @@
         </div>
     </script>
 
-    <!-- component values -->
+    <!-- component component-values -->
 
     <script id="value-static" type="text/html">
         <div class="ui-component value-static" style="margin-left: 20px; background-color: blanchedalmond;">
@@ -63,42 +63,49 @@
             <div>Name: <input type="text" name="name" /></div>
             <div>Template: <input type="text" name="template" /></div>
             <div>
-                <button class="show-template-editor">template editor</button>
+                <button class="show-attribute-editor">template editor</button>
                 <button class="remove">X</button>
             </div>
         </div>
     </script>
 
-    <!-- template editor -->
+    <!-- attribute editor -->
 
-    <script id="template-editor" type="text/html">
-        <div class="ui-component template-editor" style="margin-left: 5px; background-color: coral;">
+    <script id="attribute-editor" type="text/html">
+        <div class="ui-component attribute-editor" style="background-color: coral;">
             <table>
-                <tbody class="template-editor-values"></tbody>
+                <tbody class="attribute-editor-values"></tbody>
             </table>
             <div>
                 <button class="add-value">add</button>
                 <select class="value-type"></select>
             </div>
+            <div>
+                <button class="done">Done</button>
+                <button class="cancel">Cancel</button>
+                <button class="print">Print</button>
+            </div>
         </div>
     </script>
 
-    <script id="template-editor-item" type="text/html">
+    <script id="attribute-editor-item" type="text/html">
         <tr>
-            <td><input type="text" class="item-key" /></td>
+            <td>
+                <input type="text" class="item-key" />
+            </td>
             <td class="item-value"></td>
         </tr>
     </script>
 
-    <!-- template values -->
+    <!-- attribute values -->
 
-    <script id="template-editor-value-static" type="text/html">
+    <script id="attribute-value-scalar" type="text/html">
         <div>
-            <input type="text" class="template-editor-static-value" />
+            <input type="text" class="scalar-value" />
         </div>
     </script>
 
-    <script id="template-editor-value-amount" type="text/html">
+    <script id="attribute-value-amount" type="text/html">
 
     </script>
 </body>

@@ -1,0 +1,20 @@
+{
+  "list": [
+    {
+      "title": "Example external dict",
+      "value": "EXAMPLE_DICT"
+    }
+  ],
+  "dict": {
+    "EXAMPLE_DICT": [
+      {
+        "title": "Value 1",
+        "value": "VAL_1"
+      },
+      {
+        "title": "Value 2",
+        "value": "VAL_2"
+      }
+    ]
+  }
+}

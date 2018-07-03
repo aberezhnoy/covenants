@@ -1,5 +1,5 @@
-import ValueStatic from "../view/values/value-static.js";
-import ValueTemplate from "../view/values/value-template.js";
+import ValueStatic from "../view/component-values/value-static.js";
+import ValueTemplate from "../view/component-values/value-template.js";
 
 let typeMapping = {
     "static": ValueStatic,

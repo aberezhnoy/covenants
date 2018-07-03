@@ -1,27 +1,50 @@
 import $ from "jquery";
 import Covenant from "./view/covenant";
+import { attributeEditorInst } from "./view/attribute-editor/editor";
+/*
+import { Model } from "backbone";
 
-import { TemplateValueAttributesCollection } from "./models/template-value";
-
-const x = new TemplateValueAttributesCollection([
-    {
-        type: "PERCENTAGE",
-        key: "k1",
-        default: 56
+class Model2 extends Model {
+    defaults() {
+        return {
+            k1: "v1",
+            k2: 66
+        }
     }
-]);
+}
 
-console.log(x.toJSON());
+class Model3 extends Model2 {
+    defaults() {
+        return {
+            ...super.defaults(),
+            k2: 77,
+            k3: true
+        }
+    }
+}
 
-/*$(function() {
-    const cov = new Covenant();
+console.log(new Model3().toJSON());*/
 
-    cov
+$(function() {
+    const covenant = new Covenant();
+
+    covenant
         .toElement()
         .appendTo("#index");
 
+    attributeEditorInst
+        .toElement()
+        .appendTo("#tmpl-editor");
+
+    attributeEditorInst.fromStore([
+        {
+            type: "SCALAR",
+            key: "k1",
+            default: "hey hy"
+        }
+    ]);
 
     $("#to-output").click(() => {
-        $("#output").val(JSON.stringify(cov.toStore(), null, 2));
+        $("#output").val(JSON.stringify(covenant.toStore(), null, 2));
     });
-});*/
+});

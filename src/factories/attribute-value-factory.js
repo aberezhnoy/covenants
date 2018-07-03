@@ -1,7 +1,7 @@
 import ScalarAttributeValue from "../view/attribute-editor/values/scalar";
-/*import AmountAttributeValue from "../view/attribute-editor/values/amount";
+import AmountAttributeValue from "../view/attribute-editor/values/amount";
 import PercentageAttributeValue from "../view/attribute-editor/values/percentage";
-import DateAttributeValue from "../view/attribute-editor/values/date";*/
+/*import DateAttributeValue from "../view/attribute-editor/values/date";*/
 
 import { valueAttributeModelTypes } from "../models/attribute-value";
 
@@ -12,14 +12,14 @@ import {
     TYPE_DICT,
     TYPE_AMOUNT } from "../models/attribute-value";
 
-
 // TODO: implement DICT type
 
 const typeMapping = {
+    //[TYPE_DICT]: xxx
     //[TYPE_DATE]: DateAttributeValue,
-    [TYPE_SCALAR]: ScalarAttributeValue
-    //[TYPE_PERCENTAGE]: PercentageAttributeValue,
-    //[TYPE_AMOUNT]: AmountAttributeValue
+    [TYPE_SCALAR]: ScalarAttributeValue,
+    [TYPE_PERCENTAGE]: PercentageAttributeValue,
+    [TYPE_AMOUNT]: AmountAttributeValue
 };
 
 

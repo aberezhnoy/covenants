@@ -100,13 +100,22 @@
     <!-- attribute values -->
 
     <script id="attribute-value-scalar" type="text/html">
-        <div>
+        <div class="ui-component attribute-value-scalar">
             <input type="text" class="scalar-value" />
         </div>
     </script>
 
-    <script id="attribute-value-amount" type="text/html">
+    <script id="attribute-value-percentage" type="text/html">
+        <div class="ui-component attribute-value-percentage">
+            <input type="text" class="percentage-value" />&nbsp;%
+        </div>
+    </script>
 
+    <script id="attribute-value-amount" type="text/html">
+        <div class="ui-component attribute-value-amount">
+            <div>Amount: <input type="text" class="amount" /></div>
+            <div>Currency: <select class="currency"></select></div>
+        </div>
     </script>
 </body>
 </html>

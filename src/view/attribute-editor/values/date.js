@@ -14,14 +14,6 @@ class DateAttributeValue {
     toElement() {
         return this.rootElement;
     }
-
-    toStore() {
-        return {};
-    }
-
-    fromStore(data) {
-        //
-    }
 }
 
 export default DateAttributeValue;

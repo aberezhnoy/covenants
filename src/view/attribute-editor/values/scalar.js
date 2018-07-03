@@ -6,7 +6,11 @@ const template = $("#attribute-value-scalar").text();
 
 class ScalarAttributeValue {
     constructor(model) {
-        this.model = model || new ScalarValueAttributeModel();
+        if (!(model instanceof ScalarValueAttributeModel)) {
+            throw "Model is not of type ScalarValueAttributeModel";
+        }
+
+        this.model = model;
         this.rootElement = $(template);
         this.valueElement = this.rootElement.find(".scalar-value");
 
@@ -21,14 +25,6 @@ class ScalarAttributeValue {
 
     toElement() {
         return this.rootElement;
-    }
-
-    toStore() {
-        return this.model.toJSON();
-    }
-
-    fromStore(data) {
-        this.model.set(data);
     }
 }
 

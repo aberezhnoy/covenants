@@ -96,10 +96,8 @@
             "template": "${v1}",
             "value": {
               "v1": {
-                "default": {
-                  "amount": 0,
-                  "currency": "RUR"
-                },
+                "amount": 0,
+                "currency": "RUR",
                 "type": "AMOUNT"
               }
             }

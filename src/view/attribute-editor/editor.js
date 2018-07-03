@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { TemplateValueAttributesCollection } from "../../models/attribute-value";
+import { ValueAttributeCollection } from "../../models/attribute-value";
 import { bindDictionary } from "../../input-data-bind";
 import { ValueAttributeModelTypesDict } from "../../models/attribute-value";
 import AttributeEditorItem from "./editor-item";
@@ -9,7 +9,7 @@ const template = $("#attribute-editor").text();
 
 class AttributeEditor {
     constructor() {
-        this.model = new TemplateValueAttributesCollection();
+        this.model = new ValueAttributeCollection();
         this.doneCallback = null;
         this.values = [];
         this.rootElement = $(template);

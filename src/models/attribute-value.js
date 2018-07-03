@@ -2,30 +2,13 @@ import { Collection, Model } from "backbone";
 import { Dictionary } from "./dictionary";
 import { _ } from "underscore";
 
-class TemplateValueModel extends Model {
-    get idAttribute() {
-        return "code";
-    }
-
-    defaults() {
-        return {
-            name: "",
-            code: "",
-            template: "",
-            attributes: []
-        };
-    }
-}
-
-const TemplateValueAttributesCollection = Collection.extend({
+const ValueAttributeCollection = Collection.extend({
     model: function(attrs, options) {
         console.log("Creating model for " + attrs.type);
         const modelConstr = valueAttributeModelTypes[attrs.type];
         return new modelConstr(attrs, options);
     }
 });
-
-
 
 class BaseValueAttributeModel extends Model {
     idAttribute() {
@@ -100,10 +83,8 @@ class AmountValueAttributeModel extends BaseValueAttributeModel {
         return {
             ...super.defaults(),
             type: TYPE_AMOUNT,
-            default: {
-                value: 0.0,
-                currency: "RUR"
-            }
+            amount: 0.0,
+            currency: "RUR"
         };
     }
 }
@@ -112,7 +93,8 @@ const valueAttributeModelTypes = {
     [TYPE_SCALAR]: ScalarValueAttributeModel,
     [TYPE_PERCENTAGE]: PercentageValueAttributeModel,
     [TYPE_DATE]: DateValueAttributeModel,
-    [TYPE_DICT]: DictionaryValueAttributeModel };
+    [TYPE_DICT]: DictionaryValueAttributeModel,
+    [TYPE_AMOUNT]: AmountValueAttributeModel };
 
 const ValueAttributeModelTypesDict = new Dictionary(
     _.keys(valueAttributeModelTypes)
@@ -122,9 +104,9 @@ const ValueAttributeModelTypesDict = new Dictionary(
             value: type }}));
 
 export {
-    TemplateValueModel,
-    TemplateValueAttributesCollection,
+    ValueAttributeCollection,
     ValueAttributeModelTypesDict,
+
     AmountValueAttributeModel,
     ScalarValueAttributeModel,
     PercentageValueAttributeModel,

@@ -45,6 +45,10 @@ class ValueTemplate {
         return this.model.toJSON();
     }
 
+    fromStore(data) {
+        this.model.set(data);
+    }
+
     toElement() {
         return this.rootElement;
     }
@@ -55,11 +59,10 @@ class ValueTemplate {
 
     _showAttributeEditor() {
         attributeEditorInst.setDoneCallback(() => {
-            const attrs = attributeEditorInst.toStore();
-            this.model.set("attributes", attrs);
             attributeEditorInst.setDoneCallback(null);
+            attributeEditorInst.setModel(null);
         });
-        attributeEditorInst.fromStore(this.model.get("attributes"));
+        attributeEditorInst.setModel(this.model.get("attributes"));
         attributeEditorInst.show();
     }
 }

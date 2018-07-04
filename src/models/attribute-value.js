@@ -70,7 +70,6 @@ class DictionaryValueAttributeModel extends BaseValueAttributeModel {
         return {
             ...super.defaults(),
             type: TYPE_DICT,
-            default: "",
             dict: ""
         };
     }

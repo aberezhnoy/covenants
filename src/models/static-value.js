@@ -8,7 +8,8 @@ class StaticValueModel extends Model {
     defaults() {
         return {
             name: "",
-            code: ""
+            code: "",
+            type: "STATIC"
         };
     }
 }

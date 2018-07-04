@@ -67,6 +67,19 @@ class Component {
         return this.model.toJSON();
     }
 
+    fromStore(data) {
+        const defaultValues = data.defaultValues || [];
+        delete data.defaultValues;
+        this.model.set(data);
+
+        defaultValues.forEach((attributeValueData) => {
+            const newValue = componentValueFactory(
+                attributeValueData.type,
+                attributeValueData);
+            this.addValue(newValue);
+        })  ;
+    }
+
     addValue(value) {
         value.setParent(this);
         this.values.push(value);

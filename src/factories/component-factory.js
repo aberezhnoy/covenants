@@ -1,8 +1,20 @@
 import Component from "../view/component";
 
-// TODO: use model here
-function componentFactory(model) {
-    return new Component();
+function componentFactory(data) {
+    const component = new Component();
+
+    if (data) {
+        component.fromStore(data);
+    }
+
+    return component;
 }
 
-export default componentFactory;
+// TODO: implement
+function componentModelFactory(data) {
+    throw "Not implemented";
+}
+
+export {
+    componentFactory,
+    componentModelFactory};

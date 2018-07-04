@@ -13,10 +13,11 @@
     <hr/>
     <textarea id="output" style="width: 500px; height: 300px;"></textarea>
     <button id="to-output">Print</button>
+    <button id="load">Load</button>
     <hr/>
 
     <script id="covenant" type="text/html">
-        <div class="ui-component covenant">
+        <div class="ui-component covenant" style="background-color: gainsboro;">
             <div>
                 <div>Code: <input type="text" name="code" /></div>
                 <div>Name: <input type="text" name="name" /></div>
@@ -69,6 +70,12 @@
         </div>
     </script>
 
+    <script id="value-composite" type="text/html">
+        <div class="ui-component composite" style="margin-left: 20px; background-color: aquamarine;">
+            empty
+        </div>
+    </script>
+
     <!-- attribute editor -->
 
     <script id="attribute-editor" type="text/html">
@@ -82,8 +89,6 @@
             </div>
             <div>
                 <button class="done">Done</button>
-                <button class="cancel">Cancel</button>
-                <button class="print">Print</button>
             </div>
         </div>
     </script>

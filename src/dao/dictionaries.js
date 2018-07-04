@@ -5,8 +5,6 @@ import Covenants from "../resources/covenants";
 import ExternalDictionaries from "../resources/external-dict";
 
 const ValueTypesDict = new Dictionary(SystemDictionary["valueTypes"]);
-const TemplateValueTypesDict = new Dictionary(SystemDictionary["templateValueTypes"]);
-
 
 // covenants
 
@@ -43,7 +41,6 @@ const ExternalDictionariesDict = new Dictionary(ExternalDictionaries["list"]);
 
 export {
     ValueTypesDict,
-    TemplateValueTypesDict,
     CovenantsRequiredDict,
 
     ExternalDictionariesDict,

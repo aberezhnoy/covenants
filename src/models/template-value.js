@@ -1,4 +1,5 @@
-import { Collection, Model } from "backbone";
+import { Model } from "backbone";
+import { ValueAttributeCollection } from "./attribute-value";
 
 class TemplateValueModel extends Model {
     get idAttribute() {
@@ -10,8 +11,15 @@ class TemplateValueModel extends Model {
             name: "",
             code: "",
             template: "",
-            attributes: []
+            attributes: [],
+            type: "TEMPLATE"
         };
+    }
+
+    _relations() {
+        return {
+            attributes: ValueAttributeCollection
+        }
     }
 }
 

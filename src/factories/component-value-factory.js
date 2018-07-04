@@ -1,19 +1,25 @@
-import ValueStatic from "../view/component-values/value-static.js";
-import ValueTemplate from "../view/component-values/value-template.js";
+import ValueStatic from "../view/component-values/value-static";
+import ValueTemplate from "../view/component-values/value-template";
 
 let typeMapping = {
-    "static": ValueStatic,
-    "template": ValueTemplate
+    "STATIC": ValueStatic,
+    "TEMPLATE": ValueTemplate
 };
 
-function componentValueFactory(type) {
+function componentValueFactory(type, data) {
     const constr = typeMapping[type];
 
     if (!constr) {
         throw "Unknown value type: " + type;
     }
 
-    return new constr();
+    const inst = new constr();
+
+    if (data) {
+        inst.fromStore(data);
+    }
+
+    return inst;
 }
 
 export default componentValueFactory;

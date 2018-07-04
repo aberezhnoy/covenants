@@ -3,7 +3,7 @@ import Component from "./component";
 import CovenantModel from "../models/covenant";
 import { bindDictionary, bindInputText, bindInputValue } from "../input-data-bind";
 import { CovenantsRequiredDict } from "../dao/dictionaries";
-import componentFactory from "../factories/component-factory";
+import { componentFactory } from "../factories/component-factory";
 import GlobalEvents from "../events";
 
 const template = $("#covenant").text();
@@ -43,7 +43,6 @@ class Covenant {
     }
 
     destroy() {
-        // destroy components (childs)
         this.components.forEach((component) => {
             component.destroy();
         });
@@ -62,6 +61,16 @@ class Covenant {
             this.components.map(component => component.toStore()));
 
         return this.model.toJSON();
+    }
+
+    fromStore(data) {
+        const components = data.components || [];
+        delete data.components;
+        this.model.set(data);
+
+        components.forEach((componentData) => {
+            this.addComponent(componentFactory(componentData));
+        });
     }
 
     addComponent(component) {

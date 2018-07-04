@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { ValueAttributeCollection } from "../../models/attribute-value";
-import { bindDictionary } from "../../input-data-bind";
+import { bindDictionary, unbindDictionary } from "../../input-data-bind";
 import { ValueAttributeModelTypesDict } from "../../models/attribute-value";
 import AttributeEditorItem from "./editor-item";
 import { attributeValueModelFactory } from "../../factories/attribute-value-factory";
@@ -9,8 +9,7 @@ const template = $("#attribute-editor").text();
 
 class AttributeEditor {
     constructor() {
-        this.model = new ValueAttributeCollection();
-        //this.model = null;
+        this.model = null;
         this.doneCallback = null;
         this.values = [];
         this.rootElement = $(template);
@@ -27,43 +26,21 @@ class AttributeEditor {
             this.hide();
         });
 
-        this.rootElement.find(".cancel").click(() => {
-            this.hide();
-        });
-
         this.rootElement.find(".add-value").click(() => {
             const attrValueModel = attributeValueModelFactory(this.valueTypeElement.val());
             this.model.add(attrValueModel);
             this._addValue(attrValueModel);
         });
-
-        this.rootElement.find(".print").click(() => {
-            $("#output").val(JSON.stringify(this.toStore(), null, 2));
-        });
     }
 
     destroy() {
+        this.doneCallback = null;
+        unbindDictionary(this.valueTypeElement, ValueAttributeModelTypesDict);
         this._cleanUp();
-
-        // TODO: implement
     }
 
     toElement() {
         return this.rootElement;
-    }
-
-    toStore() {
-        return this.model.toJSON();
-    }
-
-    fromStore(data) {
-        if (!(data instanceof Array)) {
-            throw "Store must be an array";
-        }
-
-        this.model.set(data);
-
-        this._render();
     }
 
     show() {
@@ -78,17 +55,20 @@ class AttributeEditor {
         this.doneCallback = cb;
     }
 
-    setMode(model) {
-        if (!(model instanceof ValueAttributeCollection)) {
+    setModel(model) {
+        this._cleanUp();
+
+        if (!model) {
+            return;
+        } else if (!(model instanceof ValueAttributeCollection)) {
             throw "type error";
         }
 
         this.model = model;
+        this._render();
     }
 
     _render() {
-        this._cleanUp();
-
         this.model.forEach((attrValueModel) => {
             this._addValue(attrValueModel);
         });

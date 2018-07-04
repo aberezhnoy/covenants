@@ -35,6 +35,10 @@ class ValueStatic {
         return this.model.toJSON();
     }
 
+    fromStore(data) {
+        this.model.set(data);
+    }
+
     toElement() {
         return this.rootElement;
     }

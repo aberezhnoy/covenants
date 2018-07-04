@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { TemplateValueModel } from "../../models/attribute-value";
+import TemplateValueModel from "../../models/template-value";
 import GlobalEvents from "../../events";
 import {bindDictionary, bindInputValue, unbindDictionary} from "../../input-data-bind";
 import { TemplateValueTypesDict } from "../../dao/dictionaries";

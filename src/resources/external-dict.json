@@ -3,8 +3,13 @@
     {
       "title": "Example external dict",
       "value": "EXAMPLE_DICT"
+    },
+    {
+      "title": "Currency",
+      "value": "CURRENCY"
     }
   ],
+
   "dict": {
     "EXAMPLE_DICT": [
       {

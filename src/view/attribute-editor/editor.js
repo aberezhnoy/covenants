@@ -10,6 +10,7 @@ const template = $("#attribute-editor").text();
 class AttributeEditor {
     constructor() {
         this.model = new ValueAttributeCollection();
+        //this.model = null;
         this.doneCallback = null;
         this.values = [];
         this.rootElement = $(template);
@@ -75,6 +76,14 @@ class AttributeEditor {
 
     setDoneCallback(cb) {
         this.doneCallback = cb;
+    }
+
+    setMode(model) {
+        if (!(model instanceof ValueAttributeCollection)) {
+            throw "type error";
+        }
+
+        this.model = model;
     }
 
     _render() {

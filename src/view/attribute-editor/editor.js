@@ -64,6 +64,15 @@ class AttributeEditor {
             throw "type error";
         }
 
+        model.on("_remove", (mdl, view) => {
+            model.remove(mdl);
+            const idx = this.values.indexOf(view);
+
+            if (idx >= 0) {
+                this.values.splice(idx, 1);
+            }
+        });
+
         this.model = model;
         this._render();
     }

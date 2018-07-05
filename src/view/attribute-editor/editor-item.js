@@ -16,6 +16,11 @@ class AttributeEditorItem {
         this.valueContainerElement.append(this.value.toElement());
 
         bindInputValue(this.keyElement, this.model, "key");
+
+        this.rootElement.find(".remove").click(() => {
+            model.trigger("_remove", model, this);
+            this.destroy();
+        });
     }
 
     destroy() {

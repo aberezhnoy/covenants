@@ -19,7 +19,8 @@ class DateAttributeValue {
     }
 
     destroy() {
-        // TODO: implement
+        this.model = null;
+        this.rootElement.remove();
     }
 
     toElement() {

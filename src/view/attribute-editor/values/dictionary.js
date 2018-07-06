@@ -23,6 +23,8 @@ class DictionaryAttributeValue {
     destroy() {
         unbindDictionary(this.dictionaryElement, ExternalDictionariesDict);
         unbindInputValue(this.dictionaryElement, this.model, "dict");
+        this.model = null;
+        this.rootElement.remove();
     }
 
     toElement() {

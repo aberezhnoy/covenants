@@ -25,8 +25,8 @@ class AmountAttributeValue {
 
     destroy() {
         unbindDictionary(this.currencyElement, CurrencyDict);
-        unbindInputValue(this.amountElement, "amount");
-        unbindInputValue(this.currencyElement, "currency");
+        unbindInputValue(this.amountElement, this.model, "amount");
+        unbindInputValue(this.currencyElement, this.model, "currency");
         this.model = null;
         this.rootElement.remove();
     }

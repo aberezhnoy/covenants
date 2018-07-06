@@ -60,7 +60,7 @@ function bindInputText(elem, model, propName) {
 
 function unbindInputText(elem, model, propName) {
     if (!(model instanceof Model)) {
-        throw "Could't bind not a model to `Text`";
+        throw "Could't unbind not a model to `Text`";
     }
 
     const $elem = $(elem);

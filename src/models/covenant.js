@@ -11,6 +11,7 @@ class CovenantModel extends Model {
             code: "",
             type: "",
             required: "NOT_REQUIRED",
+            cdTemplate: "",
             components: []
         };
     }

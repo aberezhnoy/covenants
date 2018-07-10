@@ -22,4 +22,12 @@ function componentValueFactory(type, data) {
     return inst;
 }
 
-export default componentValueFactory;
+function componentValueModelFactory(data) {
+    const type = data.type;
+
+
+}
+
+export {
+    componentValueFactory,
+    componentValueModelFactory };

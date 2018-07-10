@@ -1,6 +1,6 @@
 import $ from "jquery";
 import componentValueFactory from "../factories/component-value-factory";
-import { bindDictionary, bindInputValue } from "../input-data-bind";
+import { bindDictionary, bindInputValue, unbindInputValue } from "../input-data-bind";
 import { ValueTypesDict } from "../dao/dictionaries";
 import ComponentModel from "../models/component";
 import GlobalEvents from "../events";
@@ -9,7 +9,8 @@ const template = $("#component").text();
 
 class Component {
     constructor() {
-        this.model = new ComponentModel();
+        //this.model = new ComponentModel();
+        this.model = null;
         this.values = [];
         this.parent = null;
 
@@ -21,8 +22,6 @@ class Component {
         this.codeElement = this.rootElement.find("[name=code]");
 
         bindDictionary(this.valueTypeElement, ValueTypesDict);
-        bindInputValue(this.nameElement, this.model, "name");
-        bindInputValue(this.codeElement, this.model, "code");
 
         this.addValueElement.click(() => {
             const newValue = componentValueFactory(this.valueTypeElement.val());
@@ -59,7 +58,7 @@ class Component {
         return this.rootElement;
     }
 
-    toStore() {
+    /*toStore() {
         this.model.set(
             "defaultValues",
             this.values.map(value => value.toStore()));
@@ -78,7 +77,7 @@ class Component {
                 attributeValueData);
             this.addValue(newValue);
         })  ;
-    }
+    }*/
 
     addValue(value) {
         value.setParent(this);
@@ -96,6 +95,25 @@ class Component {
 
     setParent(parent) {
         this.parent = parent;
+    }
+
+    setModel(model) {
+        if (!(model instanceof ComponentModel)) {
+            throw "error";
+        }
+
+        if (this.model) {
+            unbindInputValue(this.nameElement, this.model, "name");
+            unbindInputValue(this.codeElement, this.model, "code");
+            this.values.forEach(value => value.destroy());
+        }
+
+        this.model = model;
+
+        bindInputValue(this.nameElement, this.model, "name");
+        bindInputValue(this.codeElement, this.model, "code");
+
+
     }
 }
 

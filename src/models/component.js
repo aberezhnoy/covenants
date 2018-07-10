@@ -1,4 +1,11 @@
-import { Model } from "backbone";
+import { Collection, Model } from "backbone";
+import { componentValueModelFactory } from "../factories/component-value-factory";
+
+const ComponentValuesCollection = Collection.extend({
+    model: function(attrs, options) {
+        return componentValueModelFactory(attrs);
+    }
+});
 
 class ComponentModel extends Model {
     get idAttribute() {
@@ -9,8 +16,19 @@ class ComponentModel extends Model {
         return {
             code: "",
             name: "",
-            defaultValues: []
+            defaultValues: [],
+            type: "STD"
         };
+    }
+
+    _relations() {
+        return {
+            defaultValues: ComponentValuesCollection
+        }
+    }
+
+    getType() {
+        return this.get("type");
     }
 }
 

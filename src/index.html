@@ -28,6 +28,7 @@
             <div class="components"></div>
             <div class="my-cls">
                 <button class="btn-add-component">add component</button>
+                <select name="component-type"></select>
             </div>
         </div>
     </script>
@@ -42,6 +43,21 @@
             <div class="my-cls">
                 <button class="btn-add-value">add value</button>
                 <select name="valueType"></select>
+            </div>
+            <div>
+                <button class="remove">X</button>
+            </div>
+        </div>
+    </script>
+
+    <script id="composite-component" type="text/html">
+        <div class="ui-component composite-component" style="margin-left: 20px; background-color: hotpink;">
+            <div>
+                <div>Code: <input type="text" name="code" /></div>
+                <div>Name: <input type="text" name="name" /></div>
+            </div>
+            <div>
+                <div>Include components: <input type="text" name="childsText" /></div>
             </div>
             <div>
                 <button class="remove">X</button>

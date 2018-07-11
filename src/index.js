@@ -2,6 +2,13 @@ import $ from "jquery";
 import "./lib/backbone-nested-models";
 import Covenant from "./view/covenant";
 import { attributeEditorInst } from "./view/attribute-editor/editor";
+import Backbone from "backbone";
+import CovenantModel from "./models/covenant";
+import style from "./default.css";
+
+Backbone.sync = function(method, model) {
+    return false;
+};
 
 const covenantData = {
     name: "my name",
@@ -11,6 +18,7 @@ const covenantData = {
         {
             code: "CMP_1",
             name: "Component 1",
+            type: "STD",
             defaultValues: [
                 {
                     code: "OPT_1",
@@ -37,25 +45,24 @@ const covenantData = {
     ]
 };
 
-$(function() {
-    const covenant = new Covenant();
+const covenantModel = new CovenantModel(covenantData);
+const covenant = new Covenant();
 
-    covenant
-        .toElement()
-        .appendTo("#index");
+covenant
+    .toElement()
+    .appendTo("#index");
 
-    attributeEditorInst.hide();
+attributeEditorInst.hide();
 
-    attributeEditorInst
-        .toElement()
-        .appendTo("#tmpl-editor");
+attributeEditorInst
+    .toElement()
+    .appendTo("#tmpl-editor");
 
-    $("#to-output").click(() => {
-        $("#output").val(JSON.stringify(covenant.toStore(), null, 2));
-    });
+$("#to-output").click(() => {
+    $("#output").val(JSON.stringify(covenantModel.toJSON(), null, 2));
+});
 
-    $("#load").click(() => {
-        $("#output").val("");
-        covenant.fromStore(covenantData);
-    });
+$("#load").click(() => {
+    $("#output").val("");
+    covenant.setModel(covenantModel);
 });

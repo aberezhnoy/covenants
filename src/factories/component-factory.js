@@ -1,7 +1,6 @@
-import Component from "../view/component";
-import CompositeComponent from "../view/composite-component";
-import ComponentModel from "../models/component";
-import CompositeComponentModel from "../models/composite-component";
+import Component from "../view/components/component";
+import CompositeComponent from "../view/components/composite-component";
+import { ComponentModel, CompositeComponentModel } from "../models/component";
 
 const modelMapping = {
     "STD": ComponentModel,

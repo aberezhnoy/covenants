@@ -20,4 +20,6 @@ class Dictionary extends Collection {
     }
 }
 
-export { Dictionary, DictItem };
+export {
+    Dictionary,
+    DictItem };

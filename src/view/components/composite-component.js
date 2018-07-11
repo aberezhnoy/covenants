@@ -1,23 +1,18 @@
 import $ from "jquery";
-import { ComponentTemplateValueModel } from "../../models/component-value";
 import { bindInputValue, unbindInputValue } from "../../input-data-bind";
-import { attributeEditorInst } from "../attribute-editor/editor";
-import {destroyRelationModels} from "../../model-utils";
+import { destroyRelationModels } from "../../model-utils";
+import { CompositeComponentModel } from "../../models/component";
 
-const template = $("#value-template").text();
+const template = $("#composite-component").text();
 
-class ValueTemplate {
+class CompositeComponent {
     constructor() {
         this.model = null;
 
         this.rootElement = $(template);
         this.codeElement = this.rootElement.find("[name=code]");
         this.nameElement = this.rootElement.find("[name=name]");
-        this.templateElement = this.rootElement.find("[name=template]");
-
-        this.rootElement.find(".show-attribute-editor").click(() => {
-            this._showAttributeEditor();
-        });
+        this.childsTextElement = this.rootElement.find("[name=childsText]");
 
         this.rootElement.find(".remove").click(() => {
             this.model.destroy();
@@ -35,7 +30,7 @@ class ValueTemplate {
     }
 
     setModel(model) {
-        if (!(model instanceof ComponentTemplateValueModel)) {
+        if (!(model instanceof CompositeComponentModel)) {
             throw "type error";
         }
 
@@ -47,26 +42,17 @@ class ValueTemplate {
         this._initBindings();
     }
 
-    _showAttributeEditor() {
-        attributeEditorInst.setDoneCallback(() => {
-            attributeEditorInst.setDoneCallback(null);
-            attributeEditorInst.setModel(null);
-        });
-        attributeEditorInst.setModel(this.model.get("attributes"));
-        attributeEditorInst.show();
-    }
-
     _initBindings() {
-        bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.nameElement, this.model, "name");
-        bindInputValue(this.templateElement, this.model, "template");
+        bindInputValue(this.codeElement, this.model, "code");
+        bindInputValue(this.childsTextElement, this.model, "childsText");
         this.model.on("destroy", this._onModelDestroy, this);
     }
 
     _cleanupBindings() {
-        unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.nameElement, this.model, "name");
-        unbindInputValue(this.templateElement, this.model, "template");
+        unbindInputValue(this.codeElement, this.model, "code");
+        unbindInputValue(this.childsTextElement, this.model, "childsText");
         this.model.off("destroy", this._onModelDestroy, this);
     }
 
@@ -76,4 +62,4 @@ class ValueTemplate {
     }
 }
 
-export default ValueTemplate;
+export default CompositeComponent;

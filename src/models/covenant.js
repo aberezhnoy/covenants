@@ -1,4 +1,11 @@
-import { Model } from "backbone";
+import { Collection, Model } from "backbone";
+import { componentModelFactory } from "../factories/component-factory";
+
+const ComponentCollection = Collection.extend({
+    model: function(attrs, options) {
+        return componentModelFactory(attrs);
+    }
+});
 
 class CovenantModel extends Model {
     get idAttribute() {
@@ -14,6 +21,12 @@ class CovenantModel extends Model {
             cdTemplate: "",
             components: []
         };
+    }
+
+    _relations() {
+        return {
+            components: ComponentCollection
+        }
     }
 }
 

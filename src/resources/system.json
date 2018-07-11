@@ -1,4 +1,15 @@
 {
+  "componentTypes": [
+    {
+      "title": "Default",
+      "value": "STD"
+    },
+    {
+      "title": "Composite",
+      "value": "COMPOSITE"
+    }
+  ],
+
   "valueTypes": [
     {
       "title": "Static",

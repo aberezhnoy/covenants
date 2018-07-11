@@ -1,55 +1,38 @@
 import $ from "jquery";
-import Component from "./component";
 import CovenantModel from "../models/covenant";
-import { bindDictionary, bindInputValue } from "../input-data-bind";
-import { CovenantsRequiredDict } from "../dao/dictionaries";
-import { componentFactory } from "../factories/component-factory";
-import GlobalEvents from "../events";
+import {
+    bindDictionary,
+    bindInputValue,
+    unbindInputValue } from "../input-data-bind";
+import { CovenantsRequiredDict, ComponentTypesDict } from "../dao/dictionaries";
+import { componentFactory, componentModelFactory } from "../factories/component-factory";
+import {destroyRelationModels} from "../model-utils";
 
 const template = $("#covenant").text();
 
 class Covenant {
     constructor() {
-        this.model = new CovenantModel();
-        this.components = [];
-        this.parent = null;
+        this.model = null;
 
         this.rootElement = $(template);
         this.nameElement = this.rootElement.find("[name=name]");
         this.codeElement = this.rootElement.find("[name=code]");
         this.requiredElement = this.rootElement.find("[name=required]");
-        this.componentsElement = this.rootElement.find(".components");
         this.cdTemplate = this.rootElement.find("[name=cdTemplate]");
+        this.componentTypeElement = this.rootElement.find("[name=component-type]");
+        this.componentsElement = this.rootElement.find(".components");
 
         bindDictionary(this.requiredElement, CovenantsRequiredDict);
-        bindInputValue(this.nameElement, this.model, "name");
-        bindInputValue(this.codeElement, this.model, "code");
-        bindInputValue(this.codeElement, this.model, "code");
-        bindInputValue(this.requiredElement, this.model, "required");
-        bindInputValue(this.cdTemplate, this.model, "cdTemplate");
+        bindDictionary(this.componentTypeElement, ComponentTypesDict);
 
         this.rootElement.find(".btn-add-component").click(() => {
-            this.addComponent(componentFactory());
-        });
-
-        GlobalEvents.on("component:destroyed", (evt) => {
-            const parent = evt.parent;
-
-            if (parent !== this) {
-                return;
-            }
-
-            const target = evt.target;
-            this.removeComponent(target);
+            this._addNewComponent(this.componentTypeElement.val());
         });
     }
 
     destroy() {
-        this.components.forEach((component) => {
-            component.destroy();
-        });
-
-        this.model.off();
+        this._cleanupBindings();
+        this.model = null;
         this.rootElement.remove();
     }
 
@@ -57,54 +40,69 @@ class Covenant {
         return this.rootElement;
     }
 
-    toStore() {
-        this.model.set(
-            "components",
-            this.components.map(component => component.toStore()));
+    setModel(model) {
+        if (!(model instanceof CovenantModel)) {
+            throw "type error";
+        }
 
-        return this.model.toJSON();
+        if (this.model) {
+            // TODO: implement
+            this._cleanupBindings();
+        }
+
+        this.model = model;
+
+        this._initBindings();
+        this._renderComponents();
     }
 
-    fromStore(data) {
-        const components = data.components || [];
-        delete data.components;
-        this.model.set(data);
+    _addNewComponent(type) {
+        const componentModel = componentModelFactory({
+            type: type });
 
-        components.forEach((componentData) => {
-            this.addComponent(componentFactory(componentData));
+        this.model
+            .get("components")
+            .add(componentModel);
+    }
+
+    _renderComponents() {
+        this.model.get("components").forEach((componentModel) => {
+            const componentView = componentFactory(componentModel);
+            this.componentsElement.append(componentView.toElement());
         });
     }
 
-    addComponent(component) {
-        if (!(component instanceof Component)) {
-            throw "Could't add component";
-        }
-
-        component.setParent(this);
-        this.components.push(component);
-        this.componentsElement.append(component.toElement());
-
-        GlobalEvents.trigger("component:created", {
-            parent: this,
-            target: component
-        });
+    _initBindings() {
+        bindInputValue(this.nameElement, this.model, "name");
+        bindInputValue(this.codeElement, this.model, "code");
+        bindInputValue(this.codeElement, this.model, "code");
+        bindInputValue(this.requiredElement, this.model, "required");
+        bindInputValue(this.cdTemplate, this.model, "cdTemplate");
+        this.model.on("destroy", this._onModelDestroy, this);
+        this.model
+            .get("components")
+            .on("add", this._onComponentAdd, this);
     }
 
-    removeComponent(component) {
-        if (!(component instanceof Component)) {
-            throw "Could't remove component";
-        }
-
-        const idx = this.components.indexOf(component);
-
-        if (idx >= 0) {
-            this.components.splice(idx, 1);
-            console.log("Remove component from", idx);
-        }
+    _cleanupBindings() {
+        unbindInputValue(this.nameElement, this.model, "name");
+        unbindInputValue(this.codeElement, this.model, "code");
+        unbindInputValue(this.codeElement, this.model, "code");
+        unbindInputValue(this.requiredElement, this.model, "required");
+        unbindInputValue(this.cdTemplate, this.model, "cdTemplate");
+        this.model
+            .get("components")
+            .off("add", this._onComponentAdd, this);
     }
 
-    setParent(parent) {
-        this.parent = parent;
+    _onComponentAdd(componentModel, componentCollection) {
+        const componentView = componentFactory(componentModel);
+        this.componentsElement.append(componentView.toElement());
+    }
+
+    _onModelDestroy() {
+        destroyRelationModels(this.model);
+        this.destroy();
     }
 }
 

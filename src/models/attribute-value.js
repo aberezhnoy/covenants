@@ -4,7 +4,6 @@ import { _ } from "underscore";
 
 const ValueAttributeCollection = Collection.extend({
     model: function(attrs, options) {
-        console.log("Creating model for " + attrs.type);
         const modelConstr = valueAttributeModelTypes[attrs.type];
         return new modelConstr(attrs, options);
     }

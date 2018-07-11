@@ -30,4 +30,6 @@ class CovenantModel extends Model {
     }
 }
 
-export default CovenantModel;
+export {
+    CovenantModel,
+    ComponentCollection };

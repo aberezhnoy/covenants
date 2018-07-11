@@ -1,6 +1,9 @@
 import { Collection, Model } from "backbone";
 import { componentValueModelFactory } from "../factories/component-value-factory";
 
+// component collection
+// TODO: move here
+
 // component
 
 const ComponentValuesCollection = Collection.extend({

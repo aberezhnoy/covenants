@@ -3,8 +3,10 @@ import "./lib/backbone-nested-models";
 import Covenant from "./view/covenant";
 import { attributeEditorInst } from "./view/attribute-editor/editor";
 import Backbone from "backbone";
-import CovenantModel from "./models/covenant";
+import { CovenantModel } from "./models/covenant";
 import style from "./default.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap-grid.min.css";
 
 Backbone.sync = function(method, model) {
     return false;
@@ -50,7 +52,7 @@ const covenant = new Covenant();
 
 covenant
     .toElement()
-    .appendTo("#index");
+    .appendTo(".layout.default .covenant-container");
 
 attributeEditorInst.hide();
 

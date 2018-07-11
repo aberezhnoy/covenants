@@ -39,7 +39,7 @@ function bindInputText(elem, model, propName) {
     const $elem = $(elem);
     let silent = false;
 
-    model.on("change:" + propName, function(model, newValue, p3) {
+    model.on("change:" + propName, function(model, newValue) {
         if (silent === false) {
             console.log("Updating value for", elem);
             $elem.val(newValue);
@@ -77,10 +77,34 @@ const unbindInputValue = function(elem, model, propName) {
     return unbindInputText(elem, model, propName);
 };
 
+function bindText(elem, model, propName) {
+    if (!(model instanceof Model)) {
+        throw "Could't bind not a model to `Text`";
+    }
+
+    const $elem = $(elem);
+
+    model.on("change:" + propName, function(model, newValue) {
+        $elem.text(newValue);
+    }, elem);
+
+    $elem.text(model.get(propName));
+}
+
+function unbindText(elem, model, propName) {
+    if (!(model instanceof Model)) {
+        throw "Could't unbind not a model to `Text`";
+    }
+
+    model.off("change:" + propName, null, elem);
+}
+
 export {
     bindDictionary,
     unbindDictionary,
     bindInputText,
     unbindInputText,
     bindInputValue,
-    unbindInputValue };
+    unbindInputValue,
+    bindText,
+    unbindText };

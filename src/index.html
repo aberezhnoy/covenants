@@ -7,14 +7,26 @@
     <title>Covenants Editor Tool</title>
 </head>
 <body>
-    <section id="index"></section>
-    <hr/>
-    <section id="tmpl-editor"></section>
-    <hr/>
-    <textarea id="output" style="width: 500px; height: 300px;"></textarea>
-    <button id="to-output">Print</button>
-    <button id="load">Load</button>
-    <hr/>
+    <div class="layout default container">
+        <div class="row">
+            <div class="col-sm covenant-container"></div>
+            <div class="col-sm component-list-container"></div>
+            <div class="col-md component-container"></div>
+            <!--<div class="col-sm"></div>-->
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <section id="tmpl-editor"></section>
+                <div>
+                    <textarea id="output" style="width: 500px; height: 300px;"></textarea>
+                    <button id="to-output">Print</button>
+                    <button id="load">Load</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- covenant -->
 
     <script id="covenant" type="text/html">
         <div class="ui-component covenant">
@@ -25,13 +37,10 @@
                 <div>Required: <select name="required"></select></div>
                 <div>Template:<br/><textarea name="cdTemplate" style="width: 400px; height: 100px;"></textarea></div>
             </div>
-            <div class="components"></div>
-            <div class="my-cls">
-                <button class="btn-add-component">add component</button>
-                <select name="component-type"></select>
-            </div>
         </div>
     </script>
+
+    <!-- component -->
 
     <script id="component" type="text/html">
         <div class="ui-component component" style="margin-left: 20px; background-color: yellow;">
@@ -62,6 +71,23 @@
             <div>
                 <button class="remove">X</button>
             </div>
+        </div>
+    </script>
+
+    <script id="component-list" type="text/html">
+        <div class="ui-component component-list">
+            <div class="controls">
+                <button class="btn-add-component">add component</button>
+                <select name="component-type"></select>
+            </div>
+            <div class="list"></div>
+        </div>
+    </script>
+
+    <script id="component-list-item" type="text/html">
+        <div class="ui-component component-list-item">
+            <div>Code: <span class="code"></span></div>
+            <div>Name: <span class="name"></span></div>
         </div>
     </script>
 

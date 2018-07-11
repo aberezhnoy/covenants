@@ -1,12 +1,14 @@
 import $ from "jquery";
-import CovenantModel from "../models/covenant";
+import { CovenantModel } from "../models/covenant";
 import {
     bindDictionary,
     bindInputValue,
-    unbindInputValue } from "../input-data-bind";
-import { CovenantsRequiredDict, ComponentTypesDict } from "../dao/dictionaries";
-import { componentFactory, componentModelFactory } from "../factories/component-factory";
-import {destroyRelationModels} from "../model-utils";
+    unbindDictionary,
+    unbindInputValue
+} from "../input-data-bind";
+import { CovenantsRequiredDict } from "../dao/dictionaries";
+import { destroyRelationModels } from "../model-utils";
+import ComponentList from "./components/component-list";
 
 const template = $("#covenant").text();
 
@@ -14,25 +16,23 @@ class Covenant {
     constructor() {
         this.model = null;
 
+        this.componentListView = new ComponentList();
+        this.componentListView.toElement().appendTo(".layout.default .component-list-container");
+
         this.rootElement = $(template);
         this.nameElement = this.rootElement.find("[name=name]");
         this.codeElement = this.rootElement.find("[name=code]");
         this.requiredElement = this.rootElement.find("[name=required]");
         this.cdTemplate = this.rootElement.find("[name=cdTemplate]");
-        this.componentTypeElement = this.rootElement.find("[name=component-type]");
-        this.componentsElement = this.rootElement.find(".components");
 
         bindDictionary(this.requiredElement, CovenantsRequiredDict);
-        bindDictionary(this.componentTypeElement, ComponentTypesDict);
-
-        this.rootElement.find(".btn-add-component").click(() => {
-            this._addNewComponent(this.componentTypeElement.val());
-        });
     }
 
     destroy() {
+        unbindDictionary(this.requiredElement, CovenantsRequiredDict);
         this._cleanupBindings();
         this.model = null;
+        this.componentListView.destroy();
         this.rootElement.remove();
     }
 
@@ -46,30 +46,12 @@ class Covenant {
         }
 
         if (this.model) {
-            // TODO: implement
             this._cleanupBindings();
         }
 
         this.model = model;
-
         this._initBindings();
-        this._renderComponents();
-    }
-
-    _addNewComponent(type) {
-        const componentModel = componentModelFactory({
-            type: type });
-
-        this.model
-            .get("components")
-            .add(componentModel);
-    }
-
-    _renderComponents() {
-        this.model.get("components").forEach((componentModel) => {
-            const componentView = componentFactory(componentModel);
-            this.componentsElement.append(componentView.toElement());
-        });
+        this.componentListView.setModel(this.model.get("components"));
     }
 
     _initBindings() {
@@ -79,9 +61,6 @@ class Covenant {
         bindInputValue(this.requiredElement, this.model, "required");
         bindInputValue(this.cdTemplate, this.model, "cdTemplate");
         this.model.on("destroy", this._onModelDestroy, this);
-        this.model
-            .get("components")
-            .on("add", this._onComponentAdd, this);
     }
 
     _cleanupBindings() {
@@ -90,14 +69,7 @@ class Covenant {
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.requiredElement, this.model, "required");
         unbindInputValue(this.cdTemplate, this.model, "cdTemplate");
-        this.model
-            .get("components")
-            .off("add", this._onComponentAdd, this);
-    }
-
-    _onComponentAdd(componentModel, componentCollection) {
-        const componentView = componentFactory(componentModel);
-        this.componentsElement.append(componentView.toElement());
+        this.model.off("destroy", this._onModelDestroy, this);
     }
 
     _onModelDestroy() {

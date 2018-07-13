@@ -1,3 +1,57 @@
+body, div, span, ul, li, ol, section, form, input, button, select, option, textarea, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+input, textarea {
+    border: 1px solid #C0C0C0;
+}
+
+
+.ui-component .header .remove {
+    float: right;
+}
+
+.ui-component .header > span {
+    font-weight: bold;
+}
+
+.row {
+    overflow: hidden;
+}
+
+.col {
+    float: left;
+    width: 300px;
+    overflow: hidden;
+}
+
 .ui-component.covenant {
     background-color: gainsboro;
+}
+
+.ui-component.covenant textarea {
+    width: 99%;
+    height: 100px;
+}
+
+.ui-component.component {
+    background-color: yellow;
+}
+
+.ui-component.component-list {
+    background-color: goldenrod;
+}
+
+.ui-component.component-list > .list {
+    margin-top: 10px;
+}
+
+.ui-component.component-list-item {
+    border-bottom: 1px solid #C0C0C0;
+    cursor: default;
+}
+
+.ui-component.composite-component {
+    background-color: hotpink;
 }

@@ -5,8 +5,7 @@ import { attributeEditorInst } from "./view/attribute-editor/editor";
 import Backbone from "backbone";
 import { CovenantModel } from "./models/covenant";
 import style from "./default.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap-grid.min.css";
+import testCovData from "./resources/test-cov";
 
 Backbone.sync = function(method, model) {
     return false;
@@ -48,7 +47,10 @@ const covenantData = {
 };
 
 const covenantModel = new CovenantModel(covenantData);
+const testCovModel = new CovenantModel(testCovData);
+const initialCovenantModel = new CovenantModel();
 const covenant = new Covenant();
+//covenant.setModel(initialCovenantModel);
 
 covenant
     .toElement()
@@ -61,10 +63,11 @@ attributeEditorInst
     .appendTo("#tmpl-editor");
 
 $("#to-output").click(() => {
-    $("#output").val(JSON.stringify(covenantModel.toJSON(), null, 2));
+    $("#output").val(JSON.stringify(initialCovenantModel.toJSON(), null, 2));
 });
 
 $("#load").click(() => {
     $("#output").val("");
-    covenant.setModel(covenantModel);
+    covenant.setModel(testCovModel);
+    //covenant.setModel(covenantModel);
 });

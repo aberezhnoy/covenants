@@ -9,19 +9,18 @@
 <body>
     <div class="layout default container">
         <div class="row">
-            <div class="col-sm covenant-container"></div>
-            <div class="col-sm component-list-container"></div>
-            <div class="col-md component-container"></div>
-            <!--<div class="col-sm"></div>-->
+            <div class="col covenant-container" style="width: 400px;"></div>
+            <div class="col component-list-container"></div>
+            <div class="col component-container" style="width: 400px;"></div>
         </div>
-        <div class="row">
-            <div class="col-sm">
-                <section id="tmpl-editor"></section>
-                <div>
-                    <textarea id="output" style="width: 500px; height: 300px;"></textarea>
-                    <button id="to-output">Print</button>
-                    <button id="load">Load</button>
-                </div>
+        <div>
+            <section id="tmpl-editor"></section>
+            <div style="margin-top: 20px;">
+                <textarea id="output" style="width: 99%; height: 400px;"></textarea>
+            </div>
+            <div style="text-align: center;">
+                <button id="to-output">Print</button>
+                <button id="load">Load</button>
             </div>
         </div>
     </div>
@@ -30,12 +29,16 @@
 
     <script id="covenant" type="text/html">
         <div class="ui-component covenant">
-            <div>
+            <div class="header">
+                <span>Ковенант</span>
+                <button class="remove">удалить</button>
+            </div>
+            <div class="content">
                 <div>Code: <input type="text" name="code" /></div>
                 <div>Name: <input type="text" name="name" /></div>
                 <!--<div>Type: <select name="type"></select></div>-->
                 <div>Required: <select name="required"></select></div>
-                <div>Template:<br/><textarea name="cdTemplate" style="width: 400px; height: 100px;"></textarea></div>
+                <div>Template:<br/><textarea name="cdTemplate"></textarea></div>
             </div>
         </div>
     </script>
@@ -43,33 +46,33 @@
     <!-- component -->
 
     <script id="component" type="text/html">
-        <div class="ui-component component" style="margin-left: 20px; background-color: yellow;">
-            <div>
+        <div class="ui-component component">
+            <div class="header">
+                <span>Компонент</span>
+                <button class="remove">удалить</button>
+            </div>
+            <div class="content">
                 <div>Code: <input type="text" name="code" /></div>
                 <div>Name: <input type="text" name="name" /></div>
             </div>
             <div class="values"></div>
             <div class="my-cls">
-                <button class="btn-add-value">add value</button>
+                <button class="btn-add-value">Добавить значение</button>
                 <select name="valueType"></select>
-            </div>
-            <div>
-                <button class="remove">X</button>
             </div>
         </div>
     </script>
 
     <script id="composite-component" type="text/html">
-        <div class="ui-component composite-component" style="margin-left: 20px; background-color: hotpink;">
-            <div>
+        <div class="ui-component composite-component">
+            <div class="header">
+                <span>Компонент (виртуальный)</span>
+                <button class="remove">удалить</button>
+            </div>
+            <div class="content">
                 <div>Code: <input type="text" name="code" /></div>
                 <div>Name: <input type="text" name="name" /></div>
-            </div>
-            <div>
                 <div>Include components: <input type="text" name="childsText" /></div>
-            </div>
-            <div>
-                <button class="remove">X</button>
             </div>
         </div>
     </script>
@@ -77,7 +80,7 @@
     <script id="component-list" type="text/html">
         <div class="ui-component component-list">
             <div class="controls">
-                <button class="btn-add-component">add component</button>
+                <button class="btn-add-component">Добавить компонент</button>
                 <select name="component-type"></select>
             </div>
             <div class="list"></div>
@@ -91,31 +94,35 @@
         </div>
     </script>
 
-    <!-- component component-values -->
+    <!-- component values -->
 
     <script id="value-static" type="text/html">
         <div class="ui-component value-static" style="margin-left: 20px; background-color: blanchedalmond;">
-            <div>Code: <input type="text" name="code" /></div>
-            <div>Name: <input type="text" name="name" /></div>
-            <div><button class="remove">X</button></div>
+            <div class="header">
+                <span>Статический</span>
+                <button class="remove">удалить</button>
+            </div>
+            <div class="content">
+                <div>Code: <input type="text" name="code" /></div>
+                <div>Name: <input type="text" name="name" /></div>
+            </div>
         </div>
     </script>
 
     <script id="value-template" type="text/html">
         <div class="ui-component value-template" style="margin-left: 20px; background-color: cadetblue;">
-            <div>Code: <input type="text" name="code" /></div>
-            <div>Name: <input type="text" name="name" /></div>
-            <div>Template: <input type="text" name="template" /></div>
-            <div>
-                <button class="show-attribute-editor">template editor</button>
-                <button class="remove">X</button>
+            <div class="header">
+                <span>Шаблон</span>
+                <button class="remove">удалить</button>
             </div>
-        </div>
-    </script>
-
-    <script id="value-composite" type="text/html">
-        <div class="ui-component composite" style="margin-left: 20px; background-color: aquamarine;">
-            empty
+            <div>
+                <div>Code: <input type="text" name="code" /></div>
+                <div>Name: <input type="text" name="name" /></div>
+                <div>Template: <input type="text" name="template" /></div>
+                <div>
+                    <button class="show-attribute-editor">Редактор подстановок</button>
+                </div>
+            </div>
         </div>
     </script>
 

@@ -1,0 +1,204 @@
+{
+  "name": "Ограничение заимствований / предоставление поручительств",
+  "code": "ОГР_ЗАИСТВ",
+  "type": "",
+  "required": "NOT_REQUIRED",
+  "cdTemplate": "некий основной текст ковенанта",
+  "components": [
+    {
+      "code": "ВИД_УСЛОВИЯ",
+      "name": "Вид условия",
+      "defaultValues": [
+        {
+          "name": "С процентами",
+          "code": "С_ПРОЦЕНТАМИ",
+          "type": "STATIC"
+        },
+        {
+          "name": "Без процентов",
+          "code": "БЕЗ_ПРОЦЕНТОВ",
+          "type": "STATIC"
+        }
+      ],
+      "type": "STD"
+    },
+    {
+      "code": "ДОП_УСЛВ",
+      "name": "Дополнительные условия",
+      "childs": [],
+      "type": "COMPOSITE",
+      "childsText": "$доп_услв[3]"
+    },
+    {
+      "code": "ДОП_УСЛОВИЕ",
+      "name": "Дополнительные условия",
+      "defaultValues": [
+        {
+          "name": "Нет необходимости",
+          "code": "НЕТ_НЕОБХОДИМОСТИ",
+          "type": "STATIC"
+        },
+        {
+          "name": "Включая поручительства / гарантии, предоставленные третьим лицам",
+          "code": "ВКЛ_ПОР",
+          "type": "STATIC"
+        },
+        {
+          "name": "Включая поручительства / гарантии, предоставленные за Заемщика в пользу третьих лиц",
+          "code": "ВКЛ_ПОР2",
+          "type": "STATIC"
+        },
+        {
+          "name": "Включая обязательства по сделкам РЕПО",
+          "code": "ВКЛ_ОБЯЗ",
+          "type": "STATIC"
+        }
+      ],
+      "type": "STD"
+    },
+    {
+      "code": "СУММА",
+      "name": "Сумма",
+      "defaultValues": [
+        {
+          "name": "От суммы кредита",
+          "code": "ОТ_СУМ_КРЕД",
+          "template": "$v1 от суммы кредита",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "PERCENTAGE",
+              "default": 0
+            }
+          ],
+          "type": "TEMPLATE"
+        },
+        {
+          "name": "Валюта",
+          "code": "ВАЛЮТА",
+          "template": "$v1",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "AMOUNT",
+              "amount": 0,
+              "currency": "USD"
+            }
+          ],
+          "type": "TEMPLATE"
+        },
+        {
+          "name": "Процент от фин. показателя заемщика",
+          "code": "ПРОЦЕНТ_ОТ_ФИН_ПОК",
+          "template": "$v1 от $v2",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "PERCENTAGE",
+              "default": 0
+            },
+            {
+              "key": "v2",
+              "type": "DICT",
+              "dict": "EXAMPLE_DICT"
+            }
+          ],
+          "type": "TEMPLATE"
+        },
+        {
+          "name": "Процент от фин. показателя группы",
+          "code": "ПРОЦЕНТ_ОТ_ФИН_ПОК_ГРП",
+          "template": "$v1 от $v2 Группы $v3",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "PERCENTAGE",
+              "default": 0
+            },
+            {
+              "key": "v2",
+              "type": "DICT",
+              "dict": "EXAMPLE_DICT"
+            },
+            {
+              "key": "v3",
+              "type": "DICT",
+              "dict": "EXAMPLE_DICT"
+            }
+          ],
+          "type": "TEMPLATE"
+        }
+      ],
+      "type": "STD"
+    },
+    {
+      "code": "ИСКЛ",
+      "name": "Исключение",
+      "defaultValues": [
+        {
+          "name": "Нет ограничений",
+          "code": "НЕТ_ОГР",
+          "type": "STATIC"
+        },
+        {
+          "name": "Привлечение кредитов от",
+          "code": "ПРИВЛ_КРЕД_ОТ",
+          "template": "привлечение кредитов от $v1 на сумму не более $v2",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "DICT",
+              "dict": "EXAMPLE_DICT"
+            },
+            {
+              "key": "v2",
+              "type": "AMOUNT",
+              "amount": 0,
+              "currency": "RUR"
+            }
+          ],
+          "type": "TEMPLATE"
+        },
+        {
+          "name": "Привлечение займов от",
+          "code": "ПРИВЛ_ЗАЙМ_ОТ",
+          "template": "привлечение займов от $v1 на сумму не более $v2",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "DICT",
+              "dict": "EXAMPLE_DICT"
+            },
+            {
+              "key": "v2",
+              "type": "AMOUNT",
+              "amount": 0,
+              "currency": "USD"
+            }
+          ],
+          "type": "TEMPLATE"
+        },
+        {
+          "name": "Выдача векселей",
+          "code": "ВЫДАЧА_ВЕКС",
+          "template": "Выдача векселей номиналов до $v1",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "AMOUNT",
+              "amount": 0,
+              "currency": "RUR"
+            }
+          ],
+          "type": "TEMPLATE"
+        },
+        {
+          "name": "Привлечение субординированных займов",
+          "code": "ПРИВЛ_СУБРД_ЗАЙМ",
+          "type": "STATIC"
+        }
+      ],
+      "type": "STD"
+    }
+  ]
+}

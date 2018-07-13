@@ -13,6 +13,8 @@ const templateItem = $("#component-list-item").text();
 class ComponentList {
     constructor() {
         this.model = null;
+        this.selectedModel = null;
+        this.cachedViews = {};
 
         this.rootElement = $(template);
         this.componentsElement = this.rootElement.find(".list");
@@ -51,22 +53,16 @@ class ComponentList {
 
     _initBindings() {
         this.model
-            .on("add", this._onComponentAdd, this)
-            .on("remove", this._onComponentRemove, this);
+            .on("add", this._onComponentAdd, this);
     }
 
     _cleanupBindings() {
         this.model
-            .off("add", this._onComponentAdd, this)
-            .off("remove", this._onComponentRemove, this);
+            .off("add", this._onComponentAdd, this);
     }
 
     _onComponentAdd(componentModel) {
         this.componentsElement.append(this._createComponentListItem(componentModel));
-    }
-
-    _onComponentRemove(componentModel) {
-        // ???
     }
 
     _createComponentListItem(componentModel) {
@@ -75,6 +71,7 @@ class ComponentList {
             unbindText(nameElement, componentModel, "name");
             componentModel.off("destroy", onDestroy);
             itemElement.remove();
+            delete this.cachedViews[componentModel.cid];
         };
 
         const itemElement = $(templateItem);
@@ -87,10 +84,7 @@ class ComponentList {
         componentModel.on("destroy", onDestroy);
 
         itemElement.click(() => {
-            const componentView = componentFactory(componentModel);
-            componentView
-                .toElement()
-                .appendTo(".layout.default .component-container");
+            this._showComponent(componentModel);
         });
 
         return itemElement;
@@ -101,6 +95,36 @@ class ComponentList {
             type: type });
 
         this.model.add(componentModel);
+    }
+
+    _showComponent(componentModel) {
+        if (this.selectedModel === componentModel) {
+            return;
+        }
+
+        this.selectedModel = componentModel;
+
+        let componentView = this.cachedViews[this.selectedModel.cid];
+
+        if (!componentView) {
+            componentView = componentFactory(this.selectedModel);
+            componentView
+                .toElement()
+                .hide()
+                .appendTo(".layout.default .component-container");
+            this.cachedViews[this.selectedModel.cid] = componentView;
+        }
+
+        for (let cid in this.cachedViews) {
+            if (!this.cachedViews.hasOwnProperty(cid)) {
+                continue;
+            }
+
+            const view = this.cachedViews[cid];
+            view.toElement().hide();
+        }
+
+        componentView.toElement().show();
     }
 }
 

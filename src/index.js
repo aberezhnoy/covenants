@@ -63,7 +63,7 @@ attributeEditorInst
     .appendTo("#tmpl-editor");
 
 $("#to-output").click(() => {
-    $("#output").val(JSON.stringify(initialCovenantModel.toJSON(), null, 2));
+    $("#output").val(JSON.stringify(testCovModel.toJSON(), null, 2));
 });
 
 $("#load").click(() => {

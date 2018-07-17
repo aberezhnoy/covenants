@@ -1,0 +1,3 @@
+function renderCovenant(model, callback) {
+
+}

@@ -1,15 +1,15 @@
 {
   "required": [
     {
-      "title": "Required",
+      "title": "Обязателен",
       "value": "REQUIRED"
     },
     {
-      "title": "Partially required",
+      "title": "Частично обязателен",
       "value": "PARTIALLY_REQUIRED"
     },
     {
-      "title": "Not required",
+      "title": "Не обязателен",
       "value": "NOT_REQUIRED"
     }
   ]

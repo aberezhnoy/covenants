@@ -21,8 +21,9 @@ class ComponentModel extends Model {
         return {
             code: "",
             name: "",
-            defaultValues: [],
-            type: "STD"
+            type: "STD",
+            cdTemplate: "",
+            defaultValues: []
         };
     }
 
@@ -40,7 +41,7 @@ class ComponentModel extends Model {
 // composite component
 
 function parseCompositeComponentNotation(expression) {
-    const re = /\$([a-z0-9_]+)|(and)|(or)|\(+|\)+/ig;
+    const re = /\$([a-zа-я0-9_]+)|(and)|(or)|(\(+)|(\)+)/ig;
     let item;
     const result = [];
 
@@ -48,6 +49,8 @@ function parseCompositeComponentNotation(expression) {
         const componentName = item[1];
         const andOperator = item[2];
         const orOperator = item[3];
+        const openBraket = item[4];
+        const closeBraket = item[5];
 
         if (componentName) {
             result.push({
@@ -61,7 +64,16 @@ function parseCompositeComponentNotation(expression) {
             result.push({
                 operator: "or"
             });
+        } else if (openBraket) {
+            result.push({
+                openBraket: true
+            });
+        } else if (closeBraket) {
+            result.push({
+                closeBraket: true
+            });
         }
+
     }
 
     return result;

@@ -1,22 +1,22 @@
 {
   "componentTypes": [
     {
-      "title": "Default",
+      "title": "Обычное",
       "value": "STD"
     },
     {
-      "title": "Composite",
+      "title": "Логику",
       "value": "COMPOSITE"
     }
   ],
 
   "valueTypes": [
     {
-      "title": "Static",
+      "title": "Простое",
       "value": "STATIC"
     },
     {
-      "title": "Template",
+      "title": "Шаблон",
       "value": "TEMPLATE"
     }
   ]

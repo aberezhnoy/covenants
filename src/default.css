@@ -7,6 +7,24 @@ input, textarea {
     border: 1px solid #C0C0C0;
 }
 
+.layout.default {
+    /*overflow: hidden;*/
+}
+
+.layout.default > .row {
+    overflow: hidden;
+}
+
+.layout.default > .row > .col {
+    float: left;
+    margin-left: 20px;
+}
+
+.layout.default > .row > .col:first-of-type {
+    margin-left: 0;
+}
+
+/* common */
 
 .ui-component .header .remove {
     float: right;
@@ -16,18 +34,16 @@ input, textarea {
     font-weight: bold;
 }
 
-.row {
-    overflow: hidden;
-}
-
-.col {
-    float: left;
-    width: 300px;
-    overflow: hidden;
-}
+/* covenant */
 
 .ui-component.covenant {
     background-color: gainsboro;
+}
+
+/* component */
+
+.ui-component.component {
+    background-color: yellow;
 }
 
 .ui-component.covenant textarea {
@@ -35,9 +51,7 @@ input, textarea {
     height: 100px;
 }
 
-.ui-component.component {
-    background-color: yellow;
-}
+/* component list */
 
 .ui-component.component-list {
     background-color: goldenrod;
@@ -52,6 +66,20 @@ input, textarea {
     cursor: default;
 }
 
+/* composite component */
+
 .ui-component.composite-component {
     background-color: hotpink;
 }
+
+/* component value */
+
+.ui-component.value-static {
+    background-color: bisque;
+}
+
+.ui-component.value-template {
+    background-color: cadetblue;
+}
+
+/* template editor */

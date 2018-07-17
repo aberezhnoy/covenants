@@ -17,6 +17,7 @@ class Component {
         this.valueTypeElement = this.rootElement.find("[name=valueType]");
         this.nameElement = this.rootElement.find("[name=name]");
         this.codeElement = this.rootElement.find("[name=code]");
+        this.templateElement = this.rootElement.find("[name=template]");
 
         bindDictionary(this.valueTypeElement, ValueTypesDict);
 
@@ -61,6 +62,7 @@ class Component {
     _initBindings() {
         bindInputValue(this.nameElement, this.model, "name");
         bindInputValue(this.codeElement, this.model, "code");
+        bindInputValue(this.templateElement, this.model, "cdTemplate");
         this.model.on("destroy", this._onModelDestroy, this);
         this.model
             .get("defaultValues")
@@ -70,6 +72,7 @@ class Component {
     _cleanupBindings() {
         unbindInputValue(this.nameElement, this.model, "name");
         unbindInputValue(this.codeElement, this.model, "code");
+        unbindInputValue(this.templateElement, this.model, "cdTemplate");
         this.model.off("destroy", this._onModelDestroy, this);
     }
 

@@ -58,12 +58,21 @@ input, textarea {
 }
 
 .ui-component.component-list > .list {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .ui-component.component-list-item {
     border-bottom: 1px solid #C0C0C0;
     cursor: default;
+}
+
+.ui-component.component-list .list-group {
+    margin-top: 10px;
+}
+
+.ui-component.component-list .list-group .title {
+    font-weight: bold;
+    text-align: center;
 }
 
 /* composite component */

@@ -8,6 +8,8 @@
     {
       "code": "ВИД_УСЛОВИЯ",
       "name": "Вид условия",
+      "type": "STD",
+      "cdTemplate": "",
       "defaultValues": [
         {
           "name": "С процентами",
@@ -19,19 +21,36 @@
           "code": "БЕЗ_ПРОЦЕНТОВ",
           "type": "STATIC"
         }
-      ],
-      "type": "STD"
+      ]
     },
     {
       "code": "ДОП_УСЛВ",
       "name": "Дополнительные условия",
-      "childs": [],
+      "childs": [
+        {
+          "link": "доп_услвие"
+        },
+        {
+          "operator": "or"
+        },
+        {
+          "link": "доп_услвие"
+        },
+        {
+          "operator": "or"
+        },
+        {
+          "link": "доп_услвие"
+        }
+      ],
       "type": "COMPOSITE",
-      "childsText": "$доп_услв[3]"
+      "childsText": "$доп_услвие OR $доп_услвие OR $доп_услвие"
     },
     {
       "code": "ДОП_УСЛОВИЕ",
       "name": "Дополнительные условия",
+      "type": "STD",
+      "cdTemplate": "",
       "defaultValues": [
         {
           "name": "Нет необходимости",
@@ -53,12 +72,13 @@
           "code": "ВКЛ_ОБЯЗ",
           "type": "STATIC"
         }
-      ],
-      "type": "STD"
+      ]
     },
     {
       "code": "СУММА",
       "name": "Сумма",
+      "type": "STD",
+      "cdTemplate": "",
       "defaultValues": [
         {
           "name": "От суммы кредита",
@@ -128,12 +148,13 @@
           ],
           "type": "TEMPLATE"
         }
-      ],
-      "type": "STD"
+      ]
     },
     {
       "code": "ИСКЛ",
       "name": "Исключение",
+      "type": "STD",
+      "cdTemplate": "",
       "defaultValues": [
         {
           "name": "Нет ограничений",
@@ -197,8 +218,7 @@
           "code": "ПРИВЛ_СУБРД_ЗАЙМ",
           "type": "STATIC"
         }
-      ],
-      "type": "STD"
+      ]
     }
   ]
 }

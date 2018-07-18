@@ -17,7 +17,9 @@ class ComponentList {
         this.cachedViews = {};
 
         this.rootElement = $(template);
-        this.componentsElement = this.rootElement.find(".list");
+        //this.componentsElement = this.rootElement.find(".list");
+        this.componentsStandartElement = this.rootElement.find(".list .list-type-standard");
+        this.componentsCompositeElement = this.rootElement.find(".list .list-type-composite");
         this.componentTypeElement = this.rootElement.find("[name=component-type]");
 
         bindDictionary(this.componentTypeElement, ComponentTypesDict);
@@ -62,7 +64,13 @@ class ComponentList {
     }
 
     _onComponentAdd(componentModel) {
-        this.componentsElement.append(this._createComponentListItem(componentModel));
+        const type = componentModel.getType();
+
+        if (type === "STD") {
+            this.componentsStandartElement.append(this._createComponentListItem(componentModel));
+        } else if (type === "COMPOSITE") {
+            this.componentsCompositeElement.append(this._createComponentListItem(componentModel));
+        }
     }
 
     _createComponentListItem(componentModel) {

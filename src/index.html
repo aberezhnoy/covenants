@@ -73,9 +73,9 @@
                 <button class="remove">удалить</button>
             </div>
             <div class="content">
-                <div>Code: <input type="text" name="code" /></div>
-                <div>Name: <input type="text" name="name" /></div>
-                <div>Include components: <input type="text" name="childsText" /></div>
+                <div>Код: <input type="text" name="code" /></div>
+                <div>Имя: <input type="text" name="name" /></div>
+                <div>Логика: <input type="text" name="childsText" /></div>
             </div>
         </div>
     </script>
@@ -89,7 +89,16 @@
                 <button class="btn-add-component">Добавить условие</button>
                 <select name="component-type"></select>
             </div>
-            <div class="list"></div>
+            <div class="list">
+                <div class="list-group list-type-standard">
+                    <div class="title">Обычный</div>
+                    <div class="lst"></div>
+                </div>
+                <div class="list-group list-type-composite">
+                    <div class="title">Логика</div>
+                    <div class="lst"></div>
+                </div>
+            </div>
         </div>
     </script>
 
@@ -122,9 +131,9 @@
                 <button class="remove">удалить</button>
             </div>
             <div>
-                <div>Code: <input type="text" name="code" /></div>
-                <div>Name: <input type="text" name="name" /></div>
-                <div>Template: <input type="text" name="template" /></div>
+                <div>Код: <input type="text" name="code" /></div>
+                <div>Имя: <input type="text" name="name" /></div>
+                <div>Шаблон: <input type="text" name="template" /></div>
                 <div>
                     <button class="show-attribute-editor">Редактор подстановок</button>
                 </div>
@@ -175,7 +184,7 @@
 
     <script id="attribute-value-amount" type="text/html">
         <div class="ui-component attribute-value-amount">
-            <div>Amount: <input type="text" class="amount" />&nbsp;Currency: <select class="currency"></select></div>
+            <div>Сумма: <input type="text" class="amount" />&nbsp;Валюта: <select class="currency"></select></div>
         </div>
     </script>
 

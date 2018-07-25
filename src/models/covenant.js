@@ -1,9 +1,16 @@
 import { Collection, Model } from "backbone";
 import { componentModelFactory } from "../factories/component-factory";
+import { covenantModelFactory } from "../factories/covenant-factory";
 
 const ComponentCollection = Collection.extend({
     model: function(attrs, options) {
         return componentModelFactory(attrs);
+    }
+});
+
+const CovenantCollection = Collection.extend({
+    model: function(attrs, options) {
+        return covenantModelFactory(attrs);
     }
 });
 
@@ -32,4 +39,6 @@ class CovenantModel extends Model {
 
 export {
     CovenantModel,
-    ComponentCollection };
+    ComponentCollection,
+    CovenantCollection };
+

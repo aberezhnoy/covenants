@@ -1,23 +1,20 @@
 import $ from "jquery";
-import { CovenantModel } from "../models/covenant";
+import { CovenantModel } from "../../models/covenant";
 import {
     bindDictionary,
     bindInputValue,
     unbindDictionary,
     unbindInputValue
-} from "../input-data-bind";
-import { CovenantsRequiredDict } from "../dao/dictionaries";
-import { destroyRelationModels } from "../model-utils";
-import ComponentList from "./components/component-list";
+} from "../../input-data-bind";
+import { CovenantsRequiredDict } from "../../dao/dictionaries";
+import { destroyRelationModels } from "../../model-utils";
+import { componentListView } from "../views";
 
 const template = $("#covenant").text();
 
 class Covenant {
     constructor() {
         this.model = null;
-
-        this.componentListView = new ComponentList();
-        this.componentListView.toElement().appendTo(".layout.default .component-list-container");
 
         this.rootElement = $(template);
         this.nameElement = this.rootElement.find("[name=name]");
@@ -32,7 +29,7 @@ class Covenant {
         unbindDictionary(this.requiredElement, CovenantsRequiredDict);
         this._cleanupBindings();
         this.model = null;
-        this.componentListView.destroy();
+        componentListView.clear();
         this.rootElement.remove();
     }
 
@@ -51,7 +48,7 @@ class Covenant {
 
         this.model = model;
         this._initBindings();
-        this.componentListView.setModel(this.model.get("components"));
+        componentListView.setModel(this.model.get("components"));
     }
 
     _initBindings() {

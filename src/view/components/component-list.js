@@ -1,4 +1,5 @@
 import $ from "jquery";
+import _ from "underscore";
 import {
     bindDictionary,
     bindText,
@@ -17,7 +18,6 @@ class ComponentList {
         this.cachedViews = {};
 
         this.rootElement = $(template);
-        //this.componentsElement = this.rootElement.find(".list");
         this.componentsStandartElement = this.rootElement.find(".list .list-type-standard");
         this.componentsCompositeElement = this.rootElement.find(".list .list-type-composite");
         this.componentTypeElement = this.rootElement.find("[name=component-type]");
@@ -33,6 +33,12 @@ class ComponentList {
         this._cleanupBindings();
         this.model = null;
         this.rootElement.remove();
+    }
+
+    clear() {
+        _.forEach(this.cachedViews, (componentView, cid) => {
+            componentView.destroy();
+        });
     }
 
     toElement() {

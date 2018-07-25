@@ -9,6 +9,7 @@
 <body>
     <div class="layout default container">
         <div class="row">
+            <div class="col covenant-list-container" style="width: 200px; background-color: aquamarine;"></div>
             <div class="col covenant-container" style="width: 400px;"></div>
             <div class="col component-list-container"></div>
             <div class="col component-container" style="width: 400px;"></div>
@@ -42,6 +43,25 @@
                     <textarea name="cdTemplate"></textarea>
                 </div>
             </div>
+        </div>
+    </script>
+
+    <script id="covenant-list" type="text/html">
+        <div class="ui-component covenant-list">
+            <div class="header">
+                <span>Список ковенант</span>
+            </div>
+            <div class="controls">
+                <button class="btn-add-covenant">Добавить ковенант</button>
+            </div>
+            <div class="list"></div>
+        </div>
+    </script>
+
+    <script id="covenant-list-item" type="text/html">
+        <div class="ui-component covenant-list-item">
+            <div>Код: <span class="code"></span></div>
+            <div>Имя: <span class="name"></span></div>
         </div>
     </script>
 

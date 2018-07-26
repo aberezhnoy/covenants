@@ -2,7 +2,12 @@ import $ from "jquery";
 import _ from "underscore";
 import { CovenantCollection } from "../../models/covenant";
 import { bindText, unbindText } from "../../input-data-bind";
-import { covenantFactory, covenantModelFactory } from "../../factories/covenant-factory";
+import { covenantModelFactory } from "../../factories/covenant-factory";
+import {
+    clearComponentListView,
+    destroyCovenantView,
+    destroyComponentView, createCovenantView
+} from "../views";
 
 const template = $("#covenant-list").text();
 const templateItem = $("#covenant-list-item").text();
@@ -12,6 +17,7 @@ class CovenantList {
         this.model = null;
         this.selectedModel = null;
         this.cachedViews = {};
+        this.destroyHandlers = [];
 
         this.rootElement = $(template);
         this.listElement = this.rootElement.find(".list");
@@ -28,9 +34,20 @@ class CovenantList {
     }
 
     clear() {
-        _.forEach(this.cachedViews, (covenantView, cid) => {
+        // destroy cached related view
+        /*_.forEach(this.cachedViews, (covenantView, cid) => {
             covenantView.destroy();
+        });*/
+
+        // destroy list items
+        _.forEach(this.destroyHandlers, (handler) => {
+            if (handler) {
+                handler();
+            }
         });
+
+        this.cachedViews = {};
+        this.destroyHandlers.length = 0;
     }
 
     toElement() {
@@ -46,9 +63,7 @@ class CovenantList {
             this._cleanupBindings();
         }
 
-        _.forEach(this.cachedViews, (covenantView, cid) => {
-            covenantView.destroy();
-        });
+        this.clear();
 
         this.model = model;
         this._initBindings();
@@ -75,7 +90,12 @@ class CovenantList {
             unbindText(nameElement, covenantModel, "name");
             covenantModel.off("destroy", onDestroy);
             itemElement.remove();
-            delete this.cachedViews[covenantModel.cid];
+            //delete this.cachedViews[covenantModel.cid];
+
+            const idx = this.destroyHandlers.indexOf(onDestroy);
+            if (idx >= 0) {
+                this.destroyHandlers.splice(idx, 1);
+            }
         };
 
         const itemElement = $(templateItem);
@@ -84,7 +104,9 @@ class CovenantList {
 
         bindText(codeElement, covenantModel, "code");
         bindText(nameElement, covenantModel, "name");
+
         covenantModel.on("destroy", onDestroy);
+        this.destroyHandlers.push(onDestroy);
 
         itemElement.click(() => {
             this._showCovenant(covenantModel);
@@ -98,9 +120,15 @@ class CovenantList {
             return;
         }
 
+        destroyComponentView();
+        clearComponentListView();
+        destroyCovenantView();
+
         this.selectedModel = covenantModel;
 
-        let covenantView = this.cachedViews[this.selectedModel.cid];
+        createCovenantView(covenantModel);
+
+        /*let covenantView = this.cachedViews[this.selectedModel.cid];
 
         if (!covenantView) {
             covenantView = covenantFactory(this.selectedModel);
@@ -115,7 +143,7 @@ class CovenantList {
             covenantView.toElement().hide();
         });
 
-        covenantView.toElement().show();
+        covenantView.toElement().show();*/
     }
 }
 

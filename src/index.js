@@ -19,16 +19,19 @@ componentListView.toElement().appendTo(".layout.default .component-list-containe
 
 covenantListView.setModel(initialCovenantCollection);
 
+let curModel = initialCovenantCollection;
+
 attributeEditorInst
     .toElement()
     .hide()
     .appendTo("#tmpl-editor");
 
 $("#to-output").click(() => {
-    $("#output").val(JSON.stringify(initialCovenantCollection.toJSON(), null, 2));
+    $("#output").val(JSON.stringify(curModel.toJSON(), null, 2));
 });
 
 $("#load").click(() => {
     $("#output").val("");
-    // TODO: set model
+    covenantListView.setModel(testCovenantCollection);
+    curModel = testCovenantCollection;
 });

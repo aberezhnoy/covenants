@@ -4,9 +4,10 @@ import {
     bindDictionary,
     bindText,
     unbindText } from "../../input-data-bind";
-import { componentModelFactory, componentFactory } from "../../factories/component-factory";
+import { componentModelFactory } from "../../factories/component-factory";
 import { ComponentCollection } from "../../models/covenant";
 import { ComponentTypesDict } from "../../dao/dictionaries";
+import { createComponentView, destroyComponentView } from "../views";
 
 const template = $("#component-list").text();
 const templateItem = $("#component-list-item").text();
@@ -16,6 +17,7 @@ class ComponentList {
         this.model = null;
         this.selectedModel = null;
         this.cachedViews = {};
+        this.destroyHandlers = [];
 
         this.rootElement = $(template);
         this.componentsStandartElement = this.rootElement.find(".list .list-type-standard");
@@ -36,9 +38,21 @@ class ComponentList {
     }
 
     clear() {
-        _.forEach(this.cachedViews, (componentView, cid) => {
+        // destroy cached related view
+        /*_.forEach(this.cachedViews, (componentView, cid) => {
             componentView.destroy();
+        });*/
+
+        // destroy list items
+        _.forEach(this.destroyHandlers, (handler) => {
+            console.log("TO REMOVE: ", handler);
+            if (handler) {
+                handler();
+            }
         });
+
+        this.cachedViews = {};
+        this.destroyHandlers.length = 0;
     }
 
     toElement() {
@@ -53,6 +67,8 @@ class ComponentList {
         if (this.model) {
             this._cleanupBindings();
         }
+
+        this.clear();
 
         this.model = model;
         this._initBindings();
@@ -86,6 +102,10 @@ class ComponentList {
             componentModel.off("destroy", onDestroy);
             itemElement.remove();
             delete this.cachedViews[componentModel.cid];
+            const idx = this.destroyHandlers.indexOf(onDestroy);
+            if (idx >= 0) {
+                this.destroyHandlers.splice(idx, 1);
+            }
         };
 
         const itemElement = $(templateItem);
@@ -96,6 +116,7 @@ class ComponentList {
         bindText(nameElement, componentModel, "name");
 
         componentModel.on("destroy", onDestroy);
+        this.destroyHandlers.push(onDestroy);
 
         itemElement.click(() => {
             this._showComponent(componentModel);
@@ -116,9 +137,13 @@ class ComponentList {
             return;
         }
 
+        destroyComponentView();
+
         this.selectedModel = componentModel;
 
-        let componentView = this.cachedViews[this.selectedModel.cid];
+        createComponentView(componentModel);
+
+        /*let componentView = this.cachedViews[this.selectedModel.cid];
 
         if (!componentView) {
             componentView = componentFactory(this.selectedModel);
@@ -138,7 +163,7 @@ class ComponentList {
             view.toElement().hide();
         }
 
-        componentView.toElement().show();
+        componentView.toElement().show();*/
     }
 }
 

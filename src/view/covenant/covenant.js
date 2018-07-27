@@ -23,6 +23,10 @@ class Covenant {
         this.cdTemplate = this.rootElement.find("[name=cdTemplate]");
 
         bindDictionary(this.requiredElement, CovenantsRequiredDict);
+
+        this.rootElement.find(".remove").click(() => {
+            this.model.destroy();
+        });
     }
 
     destroy() {

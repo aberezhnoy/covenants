@@ -5,6 +5,7 @@ import { componentFactory } from "../factories/component-factory";
 
 const covenantListView = new CovenantList();
 const componentListView = new ComponentList();
+componentListView.toElement().hide();
 
 let covenantView = null;
 let componentView = null;

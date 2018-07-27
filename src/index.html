@@ -9,10 +9,10 @@
 <body>
     <div class="layout default container">
         <div class="row">
-            <div class="col covenant-list-container" style="width: 200px; background-color: aquamarine;"></div>
-            <div class="col covenant-container" style="width: 400px;"></div>
-            <div class="col component-list-container"></div>
-            <div class="col component-container" style="width: 400px;"></div>
+            <div class="col covenant-list-container" style="width: 250px;"></div>
+            <div class="col covenant-container" style="width: 350px;"></div>
+            <div class="col component-list-container" style="width: 250px;"></div>
+            <div class="col component-container" style="width: 350px;"></div>
         </div>
         <div>
             <section id="tmpl-editor"></section>
@@ -60,8 +60,11 @@
 
     <script id="covenant-list-item" type="text/html">
         <div class="ui-component covenant-list-item">
-            <div>Код: <span class="code"></span></div>
-            <div>Имя: <span class="name"></span></div>
+            <div class="arr" style="float: right;">&rarr;</div>
+            <div style="margin-right: 20px;">
+                <div>Код: <span class="code"></span></div>
+                <div>Имя: <span class="name"></span></div>
+            </div>
         </div>
     </script>
 
@@ -111,7 +114,7 @@
             </div>
             <div class="list">
                 <div class="list-group list-type-standard">
-                    <div class="title">Обычное</div>
+                    <div class="title">Обычные</div>
                     <div class="lst"></div>
                 </div>
                 <div class="list-group list-type-composite">
@@ -124,8 +127,11 @@
 
     <script id="component-list-item" type="text/html">
         <div class="ui-component component-list-item">
-            <div>Код: <span class="code"></span></div>
-            <div>Имя: <span class="name"></span></div>
+            <div class="arr" style="float: right;">&rarr;</div>
+            <div style="margin-right: 20px;">
+                <div>Код: <span class="code"></span></div>
+                <div>Имя: <span class="name"></span></div>
+            </div>
         </div>
     </script>
 

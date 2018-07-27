@@ -3,12 +3,12 @@ body, div, span, ul, li, ol, section, form, input, button, select, option, texta
     padding: 0;
 }
 
-input, textarea {
-    border: 1px solid #C0C0C0;
+body, table, textarea {
+    font-size: 14px;
 }
 
-.layout.default {
-    /*overflow: hidden;*/
+input, textarea {
+    border: 1px solid #C0C0C0;
 }
 
 .layout.default > .row {
@@ -26,6 +26,11 @@ input, textarea {
 
 /* common */
 
+.ui-component {
+    background-color: #F0F0F0;
+    padding: 10px;
+}
+
 .ui-component .header .remove {
     float: right;
 }
@@ -34,16 +39,39 @@ input, textarea {
     font-weight: bold;
 }
 
+.ui-component .content {
+    margin-top: 10px;
+}
+
 /* covenant */
 
 .ui-component.covenant {
-    background-color: gainsboro;
+    /*background-color: gainsboro;*/
+}
+
+/* covenant list */
+
+.ui-component.covenant-list {
+    /*background-color: aquamarine;*/
+}
+
+.ui-component.covenant-list .list {
+    margin-top: 10px;
+}
+
+.ui-component.covenant-list-item {
+    border-bottom: 1px solid #C0C0C0;
+    cursor: default;
+}
+
+.ui-component.covenant-list-item:last-of-type {
+    border-bottom: none;
 }
 
 /* component */
 
 .ui-component.component {
-    background-color: yellow;
+    /*background-color: yellow;*/
 }
 
 .ui-component.covenant textarea {
@@ -54,16 +82,25 @@ input, textarea {
 /* component list */
 
 .ui-component.component-list {
-    background-color: goldenrod;
+    /*background-color: goldenrod;*/
 }
 
-.ui-component.component-list > .list {
-    /*margin-top: 10px;*/
+.ui-component.component-list .arr {
+    color: #C0C0C0;
+}
+
+.ui-component.component-list-item:hover .arr {
+    color: #000000;
 }
 
 .ui-component.component-list-item {
-    border-bottom: 1px solid #C0C0C0;
+    /*border-bottom: 1px solid #C0C0C0;*/
     cursor: default;
+}
+
+.ui-component.component-list-item:hover {
+    background: #C0C0C0;
+    border-radius: 4px;
 }
 
 .ui-component.component-list .list-group {
@@ -78,17 +115,17 @@ input, textarea {
 /* composite component */
 
 .ui-component.composite-component {
-    background-color: hotpink;
+    /*background-color: hotpink;*/
 }
 
 /* component value */
 
 .ui-component.value-static {
-    background-color: bisque;
+    /*background-color: bisque;*/
 }
 
 .ui-component.value-template {
-    background-color: cadetblue;
+    /*background-color: cadetblue;*/
 }
 
 /* template editor */

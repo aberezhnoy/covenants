@@ -17,7 +17,6 @@ class ComponentList {
         this.model = null;
         this.selectedModel = null;
         this.cachedViews = {};
-        this.destroyHandlers = [];
         this.items = {};
 
         this.rootElement = $(template);
@@ -44,8 +43,8 @@ class ComponentList {
         });
 
         this.cachedViews = {};
-        //this.ite
-        //this.destroyHandlers.length = 0;
+
+        this.toElement().hide();
     }
 
     toElement() {
@@ -66,6 +65,8 @@ class ComponentList {
         this.model = model;
         this._initBindings();
         this.model.forEach(this._onComponentAdd, this);
+
+        this.toElement().show();
     }
 
     _initBindings() {

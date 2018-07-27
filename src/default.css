@@ -60,12 +60,22 @@ input, textarea {
 }
 
 .ui-component.covenant-list-item {
-    border-bottom: 1px solid #C0C0C0;
     cursor: default;
 }
 
-.ui-component.covenant-list-item:last-of-type {
-    border-bottom: none;
+.ui-component.covenant-list-item:hover,
+.ui-component.covenant-list-item.selected {
+    background: #C0C0C0;
+    border-radius: 4px;
+}
+
+.ui-component.covenant-list-item .arr {
+    color: #C0C0C0;
+}
+
+.ui-component.covenant-list-item:hover .arr,
+.ui-component.covenant-list-item.selected .arr {
+    color: #000000;
 }
 
 /* component */
@@ -94,7 +104,6 @@ input, textarea {
 }
 
 .ui-component.component-list-item {
-    /*border-bottom: 1px solid #C0C0C0;*/
     cursor: default;
 }
 

@@ -40,14 +40,14 @@ class CovenantList {
         });*/
 
         // destroy list items
-        _.forEach(this.destroyHandlers, (handler) => {
+        /*_.forEach(this.destroyHandlers, (handler) => {
             if (handler) {
                 handler();
             }
-        });
+        });*/
 
         this.cachedViews = {};
-        this.destroyHandlers.length = 0;
+        //this.destroyHandlers.length = 0;
     }
 
     toElement() {
@@ -90,12 +90,6 @@ class CovenantList {
             unbindText(nameElement, covenantModel, "name");
             covenantModel.off("destroy", onDestroy);
             itemElement.remove();
-            //delete this.cachedViews[covenantModel.cid];
-
-            const idx = this.destroyHandlers.indexOf(onDestroy);
-            if (idx >= 0) {
-                this.destroyHandlers.splice(idx, 1);
-            }
         };
 
         const itemElement = $(templateItem);
@@ -109,6 +103,10 @@ class CovenantList {
         this.destroyHandlers.push(onDestroy);
 
         itemElement.click(() => {
+            this.listElement
+                .find("> .selected")
+                .removeClass("selected");
+            itemElement.addClass("selected");
             this._showCovenant(covenantModel);
         });
 

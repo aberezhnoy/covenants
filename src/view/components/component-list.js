@@ -18,6 +18,7 @@ class ComponentList {
         this.selectedModel = null;
         this.cachedViews = {};
         this.destroyHandlers = [];
+        this.items = {};
 
         this.rootElement = $(template);
         this.componentsStandartElement = this.rootElement.find(".list .list-type-standard");
@@ -38,21 +39,13 @@ class ComponentList {
     }
 
     clear() {
-        // destroy cached related view
-        /*_.forEach(this.cachedViews, (componentView, cid) => {
-            componentView.destroy();
-        });*/
-
-        // destroy list items
-        _.forEach(this.destroyHandlers, (handler) => {
-            console.log("TO REMOVE: ", handler);
-            if (handler) {
-                handler();
-            }
+        _.forEach(this.items, (view) => {
+            view.destroy_();
         });
 
         this.cachedViews = {};
-        this.destroyHandlers.length = 0;
+        //this.ite
+        //this.destroyHandlers.length = 0;
     }
 
     toElement() {
@@ -89,40 +82,54 @@ class ComponentList {
         const type = componentModel.getType();
 
         if (type === "STD") {
-            this.componentsStandartElement.append(this._createComponentListItem(componentModel));
+            this.componentsStandartElement.append(
+                this._createComponentListItem(componentModel)
+                    .toElement());
         } else if (type === "COMPOSITE") {
-            this.componentsCompositeElement.append(this._createComponentListItem(componentModel));
+            this.componentsCompositeElement.append(
+                this._createComponentListItem(componentModel)
+                    .toElement());
         }
     }
 
     _createComponentListItem(componentModel) {
-        const onDestroy = () => {
-            unbindText(codeElement, componentModel, "code");
-            unbindText(nameElement, componentModel, "name");
-            componentModel.off("destroy", onDestroy);
-            itemElement.remove();
-            delete this.cachedViews[componentModel.cid];
-            const idx = this.destroyHandlers.indexOf(onDestroy);
-            if (idx >= 0) {
-                this.destroyHandlers.splice(idx, 1);
+        let _this = this;
+
+        const itemView = {
+            init: function(componentModel) {
+                this.componentModel = componentModel;
+                this.itemElement = $(templateItem);
+                this.codeElement = this.itemElement.find(".code");
+                this.nameElement = this.itemElement.find(".name");
+
+                bindText(this.codeElement, this.componentModel, "code");
+                bindText(this.nameElement, this.componentModel, "name");
+                this.componentModel.on("destroy", itemView.destroy_, itemView);
+
+                _this.items[this.componentModel.cid] = this;
+
+                this.itemElement.click(() => {
+                    _this._showComponent(componentModel);
+                });
+            },
+
+            destroy_: function() {
+                unbindText(this.codeElement, this.componentModel, "code");
+                unbindText(this.nameElement, this.componentModel, "name");
+                this.componentModel.off("destroy", this.destroy_, this);
+                this.itemElement.remove();
+
+                delete _this.items[this.componentModel.cid];
+            },
+
+            toElement: function() {
+                return this.itemElement;
             }
         };
 
-        const itemElement = $(templateItem);
-        const codeElement = itemElement.find(".code");
-        const nameElement = itemElement.find(".name");
+        itemView.init(componentModel);
 
-        bindText(codeElement, componentModel, "code");
-        bindText(nameElement, componentModel, "name");
-
-        componentModel.on("destroy", onDestroy);
-        this.destroyHandlers.push(onDestroy);
-
-        itemElement.click(() => {
-            this._showComponent(componentModel);
-        });
-
-        return itemElement;
+        return itemView;
     }
 
     _addNewComponent(type) {

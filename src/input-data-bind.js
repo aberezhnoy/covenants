@@ -41,7 +41,7 @@ function bindInputText(elem, model, propName) {
 
     model.on("change:" + propName, function(model, newValue) {
         if (silent === false) {
-            console.log("Updating value for", elem);
+            console.log("Updating value for", elem, "to", newValue);
             $elem.val(newValue);
         }
 
@@ -60,7 +60,8 @@ function bindInputText(elem, model, propName) {
 
 function unbindInputText(elem, model, propName) {
     if (!(model instanceof Model)) {
-        throw "Could't unbind not a model to `Text`";
+        console.log("Error unbind", model, ":", propName);
+        throw "Could't unbind not a model to `InputText`";
     }
 
     const $elem = $(elem);

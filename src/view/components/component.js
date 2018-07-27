@@ -32,7 +32,11 @@ class Component {
 
     destroy() {
         unbindDictionary(this.valueTypeElement, ValueTypesDict);
-        this._cleanupBindings();
+
+        if (this.model) {
+            this._cleanupBindings();
+        }
+
         this.model = null;
         this.rootElement.remove();
     }
@@ -63,7 +67,8 @@ class Component {
         bindInputValue(this.nameElement, this.model, "name");
         bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.templateElement, this.model, "cdTemplate");
-        this.model.on("destroy", this._onModelDestroy, this);
+        this.model
+            .on("destroy", this._onModelDestroy, this);
         this.model
             .get("defaultValues")
             .on("add", this._renderComponentValue, this);
@@ -73,7 +78,11 @@ class Component {
         unbindInputValue(this.nameElement, this.model, "name");
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.templateElement, this.model, "cdTemplate");
-        this.model.off("destroy", this._onModelDestroy, this);
+        this.model
+            .off("destroy", this._onModelDestroy, this);
+        this.model
+            .get("defaultValues")
+            .off("add", this._renderComponentValue, this);
     }
 
     _addNewComponentValue(type) {

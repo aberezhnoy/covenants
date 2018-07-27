@@ -54,7 +54,6 @@ class Covenant {
     _initBindings() {
         bindInputValue(this.nameElement, this.model, "name");
         bindInputValue(this.codeElement, this.model, "code");
-        bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.requiredElement, this.model, "required");
         bindInputValue(this.cdTemplate, this.model, "cdTemplate");
         this.model.on("destroy", this._onModelDestroy, this);
@@ -62,7 +61,6 @@ class Covenant {
 
     _cleanupBindings() {
         unbindInputValue(this.nameElement, this.model, "name");
-        unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.requiredElement, this.model, "required");
         unbindInputValue(this.cdTemplate, this.model, "cdTemplate");

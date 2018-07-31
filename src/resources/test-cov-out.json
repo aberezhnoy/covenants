@@ -1,0 +1,78 @@
+[
+  {
+    "code": "ОГР_ЗАИСТВ",
+    "components": [
+      {
+        "code": "ВИД_УСЛОВИЯ",
+        "value": {
+          "type": "STATIC",
+          "value": "БЕЗ_ПРОЦЕНТОВ"
+        }
+      },
+
+      {
+        "code": "ДОП_УСЛВ",
+        "type": "COMPOSITE",
+        "values": [
+          {
+            "code": "ДОП_УСЛОВИЕ",
+            "value": {
+              "type": "STATIC",
+              "value": "ВКЛ_ПОР2"
+            }
+          }
+        ]
+      },
+
+      {
+        "code": "СУММА",
+        "value": {
+          "type": "TEMPLATE",
+          "value": "ПРОЦЕНТ_ОТ_ФИН_ПОК_ГРП",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "PERCENTAGE",
+              "value": 55
+            },
+
+            {
+              "key": "v2",
+              "type": "DICT",
+              "value": "some_dict_id"
+            },
+
+            {
+              "key": "v3",
+              "type": "DICT",
+              "value": "some_another_dict_id"
+            }
+          ]
+        }
+      },
+
+      {
+        "code": "ИСКЛ",
+        "value": {
+          "type": "TEMPLATE",
+          "value": "ПРИВЛ_КРЕД_ОТ",
+          "attributes": [
+            {
+              "key": "v1",
+              "type": "DICT",
+              "value": "some_dict_id"
+            },
+            {
+              "key": "v2",
+              "type": "AMOUNT",
+              "value": {
+                "amount": 1020.5,
+                "currency": "RUR"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

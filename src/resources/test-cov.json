@@ -10,6 +10,7 @@
         "code": "ВИД_УСЛОВИЯ",
         "name": "Вид условия",
         "type": "STD",
+        "subType": "",
         "cdTemplate": "",
         "defaultValues": [
           {

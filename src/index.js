@@ -6,10 +6,17 @@ import { attributeEditorInst } from "./view/attribute-editor/editor";
 import Backbone from "backbone";
 import { CovenantCollection } from "./models/covenant";
 import testCovData from "./resources/test-cov";
+import testCovOutputData from "./resources/test-cov-out";
+
+import { ConditionCollection } from "./client/models/condition";
 
 Backbone.sync = function(method, model) {
     return false;
 };
+
+
+const output = new ConditionCollection(testCovOutputData);
+console.log(output.toJSON());
 
 const testCovenantCollection = new CovenantCollection(testCovData);
 const initialCovenantCollection = new CovenantCollection();

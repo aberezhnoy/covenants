@@ -10,6 +10,7 @@ class ComponentStaticValueModel extends Model {
         return {
             name: "",
             code: "",
+            cdTemplate: "",
             type: "STATIC"
         };
     }
@@ -28,7 +29,8 @@ class ComponentTemplateValueModel extends Model {
         return {
             name: "",
             code: "",
-            template: "",
+            template: "", // TODO: remove
+            cdTemplate: "",
             attributes: [],
             type: "TEMPLATE"
         };

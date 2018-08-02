@@ -58,19 +58,19 @@ function renderCovenant(covenantMetaModel, conditionModel) {
 
 function renderComponent(componentMetaModel, conditionComponentModel, componentMetaCollection) {
     if (conditionComponentModel.get("type") === "COMPOSITE") {
-        /*const values = conditionComponentModel.get("values");
+        const values = conditionComponentModel.get("values");
 
-        let x = [];
-
-        values.forEach((_conditionComponentModel) => {
+        let res = values.map((_conditionComponentModel) => {
             const code = _conditionComponentModel.get("code");
             const _componentMetaModel = componentMetaCollection.get(code);
 
-            x.push(renderComponent(_conditionComponentModel, _componentMetaModel, componentMetaCollection));
+            return renderComponent(
+                _componentMetaModel,
+                _conditionComponentModel,
+                componentMetaCollection);
         });
 
-        return x.join("+");*/
-        return "[not implemented]";
+        return res.join(" ");
     } else {
         const valueModel = conditionComponentModel.get("value");
         const valueModelCode = valueModel.get("value");

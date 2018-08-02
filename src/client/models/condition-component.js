@@ -1,5 +1,6 @@
 import { Collection, Model } from "backbone";
 import { Value } from "./value";
+import { modelIdentifierCode } from "../../model-utils";
 
 const ConditionComponentCollection = Collection.extend({
     model: function(attrs, options) {
@@ -8,7 +9,9 @@ const ConditionComponentCollection = Collection.extend({
         } else {
             return new ConditionComponent(attrs);
         }
-    }
+    },
+
+    modelId: modelIdentifierCode
 });
 
 class ConditionComponent extends Model {

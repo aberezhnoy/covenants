@@ -1,5 +1,49 @@
+import { getExternalDictionary } from "../dao/dictionaries";
+
+const currencyDict = getExternalDictionary("CURRENCY");
+
+function replacePlaceholders(template, callback) {
+    const re = /\$([a-zа-я0-9_]+)/ig;
+
+    return template.replace(re, (match, placeholderName, offset, string) => {
+        return callback(placeholderName);
+    });
+}
+
+const attributeRenderers = {
+    "PERCENTAGE": function(attributeMetaModel, attributeModel) {
+        const value = attributeModel.get("value");
+
+        return value + "%";
+    },
+
+    "DICT": function(attributeMetaModel, attributeModel) {
+        const value = attributeModel.get("value");
+        const dict = getExternalDictionary(value.dict);
+
+        if (!dict) {
+            return "[dictionary '" + value.dict + "' not found]";
+        }
+
+        const item = dict.get(value.value);
+
+        return item.get("title");
+    },
+
+    "AMOUNT": function(attributeMetaModel, attributeModel) {
+        const amount = attributeModel.get("value");
+        const currencyTitle = currencyDict
+            .get(amount.currency)
+            .get("title");
+
+        return amount.amount + " " + currencyTitle;
+    }
+};
+
 function renderCovenant(covenantMetaModel, conditionModel) {
     return replacePlaceholders(covenantMetaModel.get("cdTemplate"), (placeholderName) => {
+        const componentMetaCollection = covenantMetaModel.get("components");
+
         const componentMetaModel = covenantMetaModel
             .get("components")
             .get(placeholderName);
@@ -8,54 +52,67 @@ function renderCovenant(covenantMetaModel, conditionModel) {
             .get("components")
             .get(placeholderName);
 
-        return renderComponent(componentMetaModel, conditionComponentModel);
+        return renderComponent(componentMetaModel, conditionComponentModel, componentMetaCollection);
     });
 }
 
-function renderComponent(componentMetaModel, conditionComponentModel) {
-    /*return replacePlaceholders(componentMetaModel.get("cdTemplate"), (placeholderName) => {
+function renderComponent(componentMetaModel, conditionComponentModel, componentMetaCollection) {
+    if (conditionComponentModel.get("type") === "COMPOSITE") {
+        /*const values = conditionComponentModel.get("values");
 
-    });*/
-    const componentValueMetaModel = componentMetaModel
-        .get("defaultValues")
-        .get(conditionComponentModel);
+        let x = [];
 
-    //const template = componentValueMetaModel.get("cdTemplate");
+        values.forEach((_conditionComponentModel) => {
+            const code = _conditionComponentModel.get("code");
+            const _componentMetaModel = componentMetaCollection.get(code);
 
-    return renderComponentValue(componentValueMetaModel, );
-}
+            x.push(renderComponent(_conditionComponentModel, _componentMetaModel, componentMetaCollection));
+        });
 
-function renderComponentValue(componentValueMetaModel, valueModel) {
-    //
-}
+        return x.join("+");*/
+        return "[not implemented]";
+    } else {
+        const valueModel = conditionComponentModel.get("value");
+        const valueModelCode = valueModel.get("value");
 
-/*function traverseTemplate(template, callback) {
-    const re = /\$([a-zа-я0-9_]+)/ig;
-    let item;
+        const componentValueMetaModel = componentMetaModel
+            .get("defaultValues")
+            .get(valueModelCode);
 
-    while ((item = re.exec(template)) !== null) {
-        const placeholderName = item[1];
-
-        callback(placeholderName);
+        return renderComponentValue(componentValueMetaModel, valueModel);
     }
 }
 
-function getPlaceholderNames(template) {
-    let placeholderNames = [];
+function renderComponentValue(componentValueMetaModel, valueModel) {
+    const type = valueModel.get("type");
 
-    traverseTemplate(template, (placeholderName) => {
-        placeholderNames.push(placeholderName);
-    });
+    if (type === "STATIC") {
+        return componentValueMetaModel.get("name");
+    } else if (type === "TEMPLATE") {
+        const template = componentValueMetaModel.get("cdTemplate");
+        const attributesMetaCollection = componentValueMetaModel.get("attributes");
+        const attributesCollection = valueModel.get("attributes");
 
-    return placeholderNames;
-}*/
+        return replacePlaceholders(template, (placeholderName) => {
+            const attributeMetaModel = attributesMetaCollection.get(placeholderName);
+            const attributeModel = attributesCollection.get(placeholderName);
 
-function replacePlaceholders(template, callback) {
-    const re = /\$([a-zа-я0-9_]+)/ig;
+            return renderValueAttribute(attributeMetaModel, attributeModel);
+        });
+    } else {
+        return "[value renderer for '" + type + "' not found]";
+    }
+}
 
-    return template.replace(re, (match, placeholderName, offset, string) => {
-        return callback(placeholderName);
-    });
+function renderValueAttribute(attributeMetaModel, attributeModel) {
+    const type = attributeModel.get("type");
+    const renderer = attributeRenderers[type];
+
+    if (!renderer) {
+        return "[attribute renderer for '" + type + "' not found]";
+    }
+
+    return renderer(attributeMetaModel, attributeModel);
 }
 
 export {

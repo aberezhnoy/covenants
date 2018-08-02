@@ -59,14 +59,14 @@ class ValueTemplate {
     _initBindings() {
         bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.nameElement, this.model, "name");
-        bindInputValue(this.templateElement, this.model, "template");
+        bindInputValue(this.templateElement, this.model, "cdTemplate");
         this.model.on("destroy", this._onModelDestroy, this);
     }
 
     _cleanupBindings() {
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.nameElement, this.model, "name");
-        unbindInputValue(this.templateElement, this.model, "template");
+        unbindInputValue(this.templateElement, this.model, "cdTemplate");
         this.model.off("destroy", this._onModelDestroy, this);
     }
 

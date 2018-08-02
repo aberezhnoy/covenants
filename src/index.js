@@ -9,6 +9,7 @@ import testCovData from "./resources/test-cov";
 import testCovOutputData from "./resources/test-cov-out";
 
 import { ConditionCollection } from "./client/models/condition";
+import { renderCovenant } from "./client/client-renderer";
 
 Backbone.sync = function(method, model) {
     return false;
@@ -16,7 +17,7 @@ Backbone.sync = function(method, model) {
 
 
 const output = new ConditionCollection(testCovOutputData);
-console.log(output.toJSON());
+//console.log(output.toJSON());
 
 const testCovenantCollection = new CovenantCollection(testCovData);
 const initialCovenantCollection = new CovenantCollection();
@@ -42,3 +43,11 @@ $("#load").click(() => {
     covenantListView.setModel(testCovenantCollection);
     curModel = testCovenantCollection;
 });
+
+window.out = output;
+
+window.doRun = function() {
+    console.log(renderCovenant(
+        testCovenantCollection.get("ОГР_ЗАИСТВ"),
+        output.get("ОГР_ЗАИСТВ")));
+};

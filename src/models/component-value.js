@@ -29,7 +29,6 @@ class ComponentTemplateValueModel extends Model {
         return {
             name: "",
             code: "",
-            template: "", // TODO: remove
             cdTemplate: "",
             attributes: [],
             type: "TEMPLATE"

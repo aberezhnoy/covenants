@@ -1,5 +1,6 @@
 import { Collection, Model } from "backbone";
 import { componentValueModelFactory } from "../factories/component-value-factory";
+import { modelIdentifierCode } from "../model-utils";
 
 // component collection
 // TODO: move here
@@ -9,7 +10,9 @@ import { componentValueModelFactory } from "../factories/component-value-factory
 const ComponentValuesCollection = Collection.extend({
     model: function(attrs, options) {
         return componentValueModelFactory(attrs);
-    }
+    },
+
+    modelId: modelIdentifierCode
 });
 
 class ComponentModel extends Model {

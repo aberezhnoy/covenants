@@ -39,13 +39,19 @@
             {
               "key": "v2",
               "type": "DICT",
-              "value": "some_dict_id"
+              "value": {
+                "dict": "EXAMPLE_DICT",
+                "value": "VAL_2"
+              }
             },
 
             {
               "key": "v3",
               "type": "DICT",
-              "value": "some_another_dict_id"
+              "value": {
+                "dict": "EXAMPLE_DICT",
+                "value": "VAL_1"
+              }
             }
           ]
         }
@@ -60,7 +66,10 @@
             {
               "key": "v1",
               "type": "DICT",
-              "value": "some_dict_id"
+              "value": {
+                "dict": "EXAMPLE_DICT",
+                "value": "VAL_2"
+              }
             },
             {
               "key": "v2",

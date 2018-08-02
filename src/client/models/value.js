@@ -13,6 +13,10 @@ class ValueAttribute extends Model {
 const ValueAttributeCollection = Collection.extend({
     model: function(attrs, options) {
         return new ValueAttribute(attrs);
+    },
+
+    modelId: function(attr) {
+        return attr.key;
     }
 });
 
@@ -20,7 +24,7 @@ class Value extends Model {
     defaults() {
         return {
             type: "",
-            value: "",
+            value: null,
             attributes: []
         };
     }

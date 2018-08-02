@@ -21,5 +21,10 @@ function destroyRelationModels(model) {
     });
 }
 
+function modelIdentifierCode(attrs) {
+    return attrs.code;
+}
+
 export {
-    destroyRelationModels };
+    destroyRelationModels,
+    modelIdentifierCode };

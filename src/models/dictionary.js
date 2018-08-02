@@ -1,4 +1,5 @@
 import { Model, Collection } from "backbone";
+import {ValueAttribute} from "../client/models/value";
 
 class DictItem extends Model {
     get idAttribute() {
@@ -13,12 +14,16 @@ class DictItem extends Model {
     }
 }
 
-class Dictionary extends Collection {
-    constructor(options) {
-        super(options);
-        this.model = DictItem;
+
+const Dictionary = Collection.extend({
+    model: function(attrs, options) {
+        return new DictItem(attrs);
+    },
+
+    modelId: function(attr) {
+        return attr.value;
     }
-}
+});
 
 export {
     Dictionary,

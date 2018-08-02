@@ -6,6 +6,10 @@ const ValueAttributeCollection = Collection.extend({
     model: function(attrs, options) {
         const modelConstr = valueAttributeModelTypes[attrs.type];
         return new modelConstr(attrs, options);
+    },
+
+    modelId: function(attrs) {
+        return attrs.key;
     }
 });
 

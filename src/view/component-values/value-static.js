@@ -12,6 +12,7 @@ class ValueStatic {
         this.rootElement = $(template);
         this.codeElement = this.rootElement.find("[name=code]");
         this.nameElement = this.rootElement.find("[name=name]");
+        this.cdTemplateElement = this.rootElement.find("[name=cdTemplate]");
 
         this.rootElement.find(".remove").click(() => {
             this.model.destroy();
@@ -44,12 +45,14 @@ class ValueStatic {
     _initBindings() {
         bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.nameElement, this.model, "name");
+        bindInputValue(this.cdTemplateElement, this.model, "cdTemplate");
         this.model.on("destroy", this._onModelDestroy, this);
     }
 
     _cleanupBindings() {
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.nameElement, this.model, "name");
+        unbindInputValue(this.cdTemplateElement, this.model, "cdTemplate");
         this.model.off("destroy", this._onModelDestroy, this);
     }
 

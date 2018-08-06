@@ -1,14 +1,17 @@
 [
   {
-    "title": "Russian ruble",
-    "value": "RUR"
+    "title": "Рубли",
+    "value": "RUR",
+    "cdTemplate": "рублей"
   },
   {
-    "title": "US Dollar",
-    "value": "USD"
+    "title": "$",
+    "value": "USD",
+    "cdTemplate": "долларов"
   },
   {
-    "title": "Pound sterling",
-    "value": "GBP"
+    "title": "Фунты",
+    "value": "GBP",
+    "cdTemplate": "фунтов"
   }
 ]

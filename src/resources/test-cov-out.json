@@ -40,8 +40,8 @@
               "key": "v2",
               "type": "DICT",
               "value": {
-                "dict": "EXAMPLE_DICT",
-                "value": "VAL_2"
+                "dict": "FIN_IDX",
+                "value": "VAL_1"
               }
             },
 
@@ -49,7 +49,7 @@
               "key": "v3",
               "type": "DICT",
               "value": {
-                "dict": "EXAMPLE_DICT",
+                "dict": "FIN_GROUPS",
                 "value": "VAL_1"
               }
             }
@@ -67,7 +67,7 @@
               "key": "v1",
               "type": "DICT",
               "value": {
-                "dict": "EXAMPLE_DICT",
+                "dict": "FIN_GROUPS",
                 "value": "VAL_2"
               }
             },

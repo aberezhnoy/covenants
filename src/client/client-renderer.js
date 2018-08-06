@@ -25,20 +25,20 @@ const attributeRenderers = {
             return "[dictionary '" + value.dict + "' not found]";
         }
 
-        const item = dict.get(value.value);
-
-        return item.get("title");
+        return  renderDict(dict.get(value.value));
     },
 
     "AMOUNT": function(attributeMetaModel, attributeModel) {
         const amount = attributeModel.get("value");
-        const currencyTitle = currencyDict
-            .get(amount.currency)
-            .get("title");
+        const currencyDictItem = currencyDict.get(amount.currency);
 
-        return amount.amount + " " + currencyTitle;
+        return amount.amount + " " + renderDict(currencyDictItem);
     }
 };
+
+function renderDict(dictItemModel) {
+    return dictItemModel.get("cdTemplate") || dictItemModel.get("title")
+}
 
 function renderCovenant(covenantMetaModel, conditionModel) {
     return replacePlaceholders(covenantMetaModel.get("cdTemplate"), (placeholderName) => {
@@ -79,7 +79,17 @@ function renderComponent(componentMetaModel, conditionComponentModel, componentM
             .get("defaultValues")
             .get(valueModelCode);
 
-        return renderComponentValue(componentValueMetaModel, valueModel);
+        const template = componentMetaModel.get("cdTemplate");
+
+        if (template) {
+            return replacePlaceholders(template, (placeholderName) => {
+                if (placeholderName === "out") {
+                    return renderComponentValue(componentValueMetaModel, valueModel);
+                }
+            });
+        } else {
+            return renderComponentValue(componentValueMetaModel, valueModel);
+        }
     }
 }
 
@@ -87,7 +97,7 @@ function renderComponentValue(componentValueMetaModel, valueModel) {
     const type = valueModel.get("type");
 
     if (type === "STATIC") {
-        return componentValueMetaModel.get("name");
+        return componentValueMetaModel.get("cdTemplate");
     } else if (type === "TEMPLATE") {
         const template = componentValueMetaModel.get("cdTemplate");
         const attributesMetaCollection = componentValueMetaModel.get("attributes");

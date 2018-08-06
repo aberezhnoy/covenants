@@ -4,7 +4,7 @@
     "code": "ОГР_ЗАИСТВ",
     "type": "",
     "required": "NOT_REQUIRED",
-    "cdTemplate": "некий основной текст ковенанта, -$ВИД_УСЛОВИЯ- потом -$ДОП_УСЛВ- потом -$СУММА- потом -$ИСКЛ-",
+    "cdTemplate": "Ограничить заимствования Заемщика $ВИД_УСЛОВИЯ $СУММА $ИСКЛ.",
     "components": [
       {
         "code": "ВИД_УСЛОВИЯ",
@@ -15,13 +15,13 @@
           {
             "name": "С процентами",
             "code": "С_ПРОЦЕНТАМИ",
-            "cdTemplate": "с учетом процентов",
+            "cdTemplate": "с процентами",
             "type": "STATIC"
           },
           {
             "name": "Без процентов",
             "code": "БЕЗ_ПРОЦЕНТОВ",
-            "cdTemplate": "без учетом процентов",
+            "cdTemplate": "без процентов",
             "type": "STATIC"
           }
         ],
@@ -59,7 +59,7 @@
           {
             "name": "Нет необходимости",
             "code": "НЕТ_НЕОБХОДИМОСТИ",
-            "cdTemplate": "нет необходимости",
+            "cdTemplate": "",
             "type": "STATIC"
           },
           {
@@ -91,7 +91,7 @@
           {
             "name": "От суммы кредита",
             "code": "ОТ_СУМ_КРЕД",
-            "cdTemplate": "$v1 от суммы кредита",
+            "cdTemplate": "суммой $v1 от суммы кредита",
             "attributes": [
               {
                 "key": "v1",
@@ -104,7 +104,7 @@
           {
             "name": "Валюта",
             "code": "ВАЛЮТА",
-            "cdTemplate": "$v1",
+            "cdTemplate": "суммой $v1",
             "attributes": [
               {
                 "key": "v1",
@@ -118,7 +118,7 @@
           {
             "name": "Процент от фин. показателя заемщика",
             "code": "ПРОЦЕНТ_ОТ_ФИН_ПОК",
-            "cdTemplate": "$v1 от $v2",
+            "cdTemplate": "суммой $v1 от $v2 Заемщика",
             "attributes": [
               {
                 "key": "v1",
@@ -128,7 +128,7 @@
               {
                 "key": "v2",
                 "type": "DICT",
-                "dict": "EXAMPLE_DICT"
+                "dict": "FIN_IDX"
               }
             ],
             "type": "TEMPLATE"
@@ -136,7 +136,7 @@
           {
             "name": "Процент от фин. показателя группы",
             "code": "ПРОЦЕНТ_ОТ_ФИН_ПОК_ГРП",
-            "cdTemplate": "$v1 от $v2 Группы $v3",
+            "cdTemplate": "суммой $v1 от $v2 Группы $v3",
             "attributes": [
               {
                 "key": "v1",
@@ -146,12 +146,12 @@
               {
                 "key": "v2",
                 "type": "DICT",
-                "dict": "EXAMPLE_DICT"
+                "dict": "FIN_IDX"
               },
               {
                 "key": "v3",
                 "type": "DICT",
-                "dict": "EXAMPLE_DICT"
+                "dict": "FIN_GROUPS"
               }
             ],
             "type": "TEMPLATE"
@@ -162,7 +162,7 @@
         "code": "ИСКЛ",
         "name": "Исключение",
         "type": "STD",
-        "cdTemplate": "",
+        "cdTemplate": ", $out",
         "defaultValues": [
           {
             "name": "Нет ограничений",
@@ -173,12 +173,12 @@
           {
             "name": "Привлечение кредитов от",
             "code": "ПРИВЛ_КРЕД_ОТ",
-            "cdTemplate": "привлечение кредитов от $v1 на сумму не более $v2",
+            "cdTemplate": "кроме привлечение кредитов от $v1 на сумму не более $v2",
             "attributes": [
               {
                 "key": "v1",
                 "type": "DICT",
-                "dict": "EXAMPLE_DICT"
+                "dict": "FIN_GROUPS"
               },
               {
                 "key": "v2",
@@ -192,12 +192,12 @@
           {
             "name": "Привлечение займов от",
             "code": "ПРИВЛ_ЗАЙМ_ОТ",
-            "cdTemplate": "привлечение займов от $v1 на сумму не более $v2",
+            "cdTemplate": "кроме привлечение займов от $v1 на сумму не более $v2",
             "attributes": [
               {
                 "key": "v1",
                 "type": "DICT",
-                "dict": "EXAMPLE_DICT"
+                "dict": "FIN_GROUPS"
               },
               {
                 "key": "v2",
@@ -211,7 +211,7 @@
           {
             "name": "Выдача векселей",
             "code": "ВЫДАЧА_ВЕКС",
-            "cdTemplate": "Выдача векселей номиналов до $v1",
+            "cdTemplate": "кроме выдачи векселей номиналом до $v1",
             "attributes": [
               {
                 "key": "v1",
@@ -225,7 +225,7 @@
           {
             "name": "Привлечение субординированных займов",
             "code": "ПРИВЛ_СУБРД_ЗАЙМ",
-            "cdTemplate": "",
+            "cdTemplate": "пкромеривлечение субординированных займов",
             "type": "STATIC"
           }
         ]

@@ -1,24 +1,58 @@
 {
   "list": [
     {
-      "title": "Example external dict",
+      "title": "Справочник заглушка",
       "value": "EXAMPLE_DICT"
     },
     {
-      "title": "Currency",
+      "title": "Валюта",
       "value": "CURRENCY"
+    },
+    {
+      "title": "Финансовый показатель",
+      "value": "FIN_IDX"
+    },
+    {
+      "title": "Группа компаний",
+      "value": "FIN_GROUPS"
     }
   ],
 
   "dict": {
     "EXAMPLE_DICT": [
       {
-        "title": "Value 1",
+        "title": "Значение 1",
         "value": "VAL_1"
       },
       {
-        "title": "Value 2",
+        "title": "значение 2",
         "value": "VAL_2"
+      }
+    ],
+
+    "FIN_IDX": [
+      {
+        "title": "Годовая выручка",
+        "value": "VAL_1",
+        "cdTemplate": "годовой выручки"
+      },
+      {
+        "title": "Квартальная выручка",
+        "value": "VAL_2",
+        "cdTemplate": "квартальной выручки"
+      }
+    ],
+
+    "FIN_GROUPS": [
+      {
+        "title": "ООО 'Группа компаний 1'",
+        "value": "VAL_1",
+        "cdTemplate": "ООО 'Группа компаний 1', адрес 1"
+      },
+      {
+        "title": "ЗАО 'Группа компаний 2'",
+        "value": "VAL_2",
+        "cdTemplate": "ООО 'Группа компаний 2', адрес 2"
       }
     ]
   }

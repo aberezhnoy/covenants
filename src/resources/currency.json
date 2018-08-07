@@ -2,16 +2,16 @@
   {
     "title": "Рубли",
     "value": "RUR",
-    "cdTemplate": "рублей"
+    "cdTemplate": "руб"
   },
   {
     "title": "$",
     "value": "USD",
-    "cdTemplate": "долларов"
+    "cdTemplate": "$"
   },
   {
     "title": "Фунты",
     "value": "GBP",
-    "cdTemplate": "фунтов"
+    "cdTemplate": "фунт."
   }
 ]

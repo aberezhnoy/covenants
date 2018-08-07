@@ -1,7 +1,9 @@
+import $ from "jquery";
 import CovenantList from "./covenant/covenant-list";
 import ComponentList from "./components/component-list";
 import { covenantFactory } from "../factories/covenant-factory";
 import { componentFactory } from "../factories/component-factory";
+import { renderCovenantUI } from "../client/ui-builder";
 
 const covenantListView = new CovenantList();
 const componentListView = new ComponentList();
@@ -46,6 +48,14 @@ function clearComponentListView() {
     componentListView.clear();
 }
 
+function createInputUIView(model) {
+    const view = renderCovenantUI(model);
+
+    $("#input-ui")
+        .empty()
+        .append(view);
+}
+
 export {
     covenantListView,
     componentListView,
@@ -53,4 +63,5 @@ export {
     destroyComponentView,
     createCovenantView,
     createComponentView,
-    clearComponentListView };
+    clearComponentListView,
+    createInputUIView };

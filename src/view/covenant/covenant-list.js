@@ -6,7 +6,9 @@ import { covenantModelFactory } from "../../factories/covenant-factory";
 import {
     clearComponentListView,
     destroyCovenantView,
-    destroyComponentView, createCovenantView
+    destroyComponentView,
+    createCovenantView,
+    createInputUIView
 } from "../views";
 
 const template = $("#covenant-list").text();
@@ -125,6 +127,8 @@ class CovenantList {
         this.selectedModel = covenantModel;
 
         createCovenantView(covenantModel);
+
+        createInputUIView(covenantModel);
 
         /*let covenantView = this.cachedViews[this.selectedModel.cid];
 

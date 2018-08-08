@@ -108,4 +108,5 @@ export {
     bindInputValue,
     unbindInputValue,
     bindText,
-    unbindText };
+    unbindText,
+    renderSelect };

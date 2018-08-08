@@ -1,6 +1,9 @@
 import { Model } from "backbone";
 import { ValueAttributeCollection } from "./attribute-value";
 
+const COMPONENT_VALUE_STATIC = "STATIC";
+const COMPONENT_VALUE_TEMPLATE = "TEMPLATE";
+
 class ComponentStaticValueModel extends Model {
     get idAttribute() {
         return "code";
@@ -11,7 +14,7 @@ class ComponentStaticValueModel extends Model {
             name: "",
             code: "",
             cdTemplate: "",
-            type: "STATIC"
+            type: COMPONENT_VALUE_STATIC
         };
     }
 
@@ -31,7 +34,7 @@ class ComponentTemplateValueModel extends Model {
             code: "",
             cdTemplate: "",
             attributes: [],
-            type: "TEMPLATE"
+            type: COMPONENT_VALUE_TEMPLATE
         };
     }
 
@@ -48,4 +51,6 @@ class ComponentTemplateValueModel extends Model {
 
 export {
     ComponentStaticValueModel,
-    ComponentTemplateValueModel };
+    ComponentTemplateValueModel,
+    COMPONENT_VALUE_STATIC,
+    COMPONENT_VALUE_TEMPLATE };

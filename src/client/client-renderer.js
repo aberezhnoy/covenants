@@ -82,11 +82,17 @@ function renderComponent(componentMetaModel, conditionComponentModel, componentM
         const template = componentMetaModel.get("cdTemplate");
 
         if (template) {
-            return replacePlaceholders(template, (placeholderName) => {
-                if (placeholderName === "out") {
-                    return renderComponentValue(componentValueMetaModel, valueModel);
-                }
-            });
+            const compValRender = renderComponentValue(componentValueMetaModel, valueModel);
+
+            if (compValRender && compValRender.length > 0) {
+                return replacePlaceholders(template, (placeholderName) => {
+                    if (placeholderName === "out") {
+                        return compValRender;
+                    }
+                });
+            } else {
+                return "";
+            }
         } else {
             return renderComponentValue(componentValueMetaModel, valueModel);
         }

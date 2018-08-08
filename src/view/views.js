@@ -51,6 +51,10 @@ function clearComponentListView() {
 function createInputUIView(model) {
     const view = renderCovenantUI(model);
 
+    view.find(".do-refresh").click(() => {
+        createInputUIView(model);
+    });
+
     $("#input-ui")
         .empty()
         .append(view);

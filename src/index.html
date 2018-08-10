@@ -39,9 +39,14 @@
                 <div>Код: <input type="text" name="code" /></div>
                 <div>Имя: <input type="text" name="name" /></div>
                 <div>Обязателен: <select name="required"></select></div>
+                <div>Коментарии: <textarea name="comments"></textarea></div>
                 <div>
-                    <div>Текст шаблона (ППР):</div>
+                    <div>Текст шаблона (ПРКО):</div>
                     <textarea name="cdTemplate"></textarea>
+                </div>
+                <div>
+                    <div>Текст шаблона (КОД):</div>
+                    <textarea name="oTemplate"></textarea>
                 </div>
             </div>
         </div>
@@ -80,7 +85,8 @@
             <div class="content">
                 <div>Код: <input type="text" name="code" /></div>
                 <div>Имя: <input type="text" name="name" /></div>
-                <div>Шаблон: <input type="text" name="cdTemplate" /></div>
+                <div>Шаблон (ПРКО): <input type="text" name="cdTemplate" /></div>
+                <div>Шаблон (КОД): <input type="text" name="oTemplate" /></div>
             </div>
             <div class="controls">
                 <button class="btn-add-value">Добавить значение</button>
@@ -147,7 +153,8 @@
             <div class="content">
                 <div>Код: <input type="text" name="code" /></div>
                 <div>Имя: <input type="text" name="name" /></div>
-                <div>Шаблон: <input type="text" name="cdTemplate" /></div>
+                <div>Шаблон (ПРКО): <input type="text" name="cdTemplate" /></div>
+                <div>Шаблон (КОД): <input type="text" name="oTemplate" /></div>
             </div>
         </div>
     </script>
@@ -161,7 +168,8 @@
             <div>
                 <div>Код: <input type="text" name="code" /></div>
                 <div>Имя: <input type="text" name="name" /></div>
-                <div>Шаблон: <input type="text" name="template" /></div>
+                <div>Шаблон (ПРКО): <input type="text" name="cdTemplate" /></div>
+                <div>Шаблон (КОД): <input type="text" name="oTemplate" /></div>
                 <div>
                     <button class="show-attribute-editor">Редактор подстановок</button>
                 </div>

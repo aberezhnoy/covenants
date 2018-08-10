@@ -26,6 +26,7 @@ class ComponentModel extends Model {
             name: "",
             type: "STD",
             cdTemplate: "",
+            oTemplate: "",
             defaultValues: []
         };
     }

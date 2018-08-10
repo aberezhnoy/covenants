@@ -31,6 +31,8 @@ class CovenantModel extends Model {
             type: "",
             required: "NOT_REQUIRED",
             cdTemplate: "",
+            oTemplate: "",
+            comments: "",
             components: []
         };
     }

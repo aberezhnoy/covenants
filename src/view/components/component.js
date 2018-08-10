@@ -18,6 +18,7 @@ class Component {
         this.nameElement = this.rootElement.find("[name=name]");
         this.codeElement = this.rootElement.find("[name=code]");
         this.templateElement = this.rootElement.find("[name=cdTemplate]");
+        this.oTemplateElement = this.rootElement.find("[name=oTemplate]");
 
         bindDictionary(this.valueTypeElement, ValueTypesDict);
 
@@ -67,6 +68,7 @@ class Component {
         bindInputValue(this.nameElement, this.model, "name");
         bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.templateElement, this.model, "cdTemplate");
+        bindInputValue(this.oTemplateElement, this.model, "oTemplate");
         this.model
             .on("destroy", this._onModelDestroy, this);
         this.model
@@ -78,6 +80,7 @@ class Component {
         unbindInputValue(this.nameElement, this.model, "name");
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.templateElement, this.model, "cdTemplate");
+        unbindInputValue(this.oTemplateElement, this.model, "oTemplate");
         this.model
             .off("destroy", this._onModelDestroy, this);
         this.model

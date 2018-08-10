@@ -14,6 +14,7 @@ class ComponentStaticValueModel extends Model {
             name: "",
             code: "",
             cdTemplate: "",
+            oTemplate: "",
             type: COMPONENT_VALUE_STATIC
         };
     }
@@ -33,6 +34,7 @@ class ComponentTemplateValueModel extends Model {
             name: "",
             code: "",
             cdTemplate: "",
+            oTemplate: "",
             attributes: [],
             type: COMPONENT_VALUE_TEMPLATE
         };

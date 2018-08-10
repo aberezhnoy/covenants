@@ -21,6 +21,8 @@ class Covenant {
         this.codeElement = this.rootElement.find("[name=code]");
         this.requiredElement = this.rootElement.find("[name=required]");
         this.cdTemplate = this.rootElement.find("[name=cdTemplate]");
+        this.oTemplate = this.rootElement.find("[name=oTemplate]");
+        this.comments = this.rootElement.find("[name=comments]");
 
         bindDictionary(this.requiredElement, CovenantsRequiredDict);
 
@@ -60,6 +62,8 @@ class Covenant {
         bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.requiredElement, this.model, "required");
         bindInputValue(this.cdTemplate, this.model, "cdTemplate");
+        bindInputValue(this.oTemplate, this.model, "oTemplate");
+        bindInputValue(this.comments, this.model, "comments");
         this.model.on("destroy", this._onModelDestroy, this);
     }
 
@@ -68,6 +72,8 @@ class Covenant {
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.requiredElement, this.model, "required");
         unbindInputValue(this.cdTemplate, this.model, "cdTemplate");
+        unbindInputValue(this.oTemplate, this.model, "oTemplate");
+        unbindInputValue(this.comments, this.model, "comments");
         this.model.off("destroy", this._onModelDestroy, this);
     }
 

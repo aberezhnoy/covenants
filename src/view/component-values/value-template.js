@@ -13,7 +13,8 @@ class ValueTemplate {
         this.rootElement = $(template);
         this.codeElement = this.rootElement.find("[name=code]");
         this.nameElement = this.rootElement.find("[name=name]");
-        this.templateElement = this.rootElement.find("[name=template]");
+        this.templateElement = this.rootElement.find("[name=cdTemplate]");
+        this.oTemplateElement = this.rootElement.find("[name=oTemplate]");
 
         this.rootElement.find(".show-attribute-editor").click(() => {
             this._showAttributeEditor();
@@ -60,6 +61,7 @@ class ValueTemplate {
         bindInputValue(this.codeElement, this.model, "code");
         bindInputValue(this.nameElement, this.model, "name");
         bindInputValue(this.templateElement, this.model, "cdTemplate");
+        bindInputValue(this.oTemplateElement, this.model, "oTemplate");
         this.model.on("destroy", this._onModelDestroy, this);
     }
 
@@ -67,6 +69,7 @@ class ValueTemplate {
         unbindInputValue(this.codeElement, this.model, "code");
         unbindInputValue(this.nameElement, this.model, "name");
         unbindInputValue(this.templateElement, this.model, "cdTemplate");
+        unbindInputValue(this.oTemplateElement, this.model, "oTemplate");
         this.model.off("destroy", this._onModelDestroy, this);
     }
 

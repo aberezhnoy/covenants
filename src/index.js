@@ -10,16 +10,16 @@ import testCovOutputData from "./resources/test-cov-out";
 
 import { ConditionCollection } from "./client/models/condition";
 import { renderCovenant } from "./client/client-renderer";
+import { downloadFile, uploadFile } from "./file-utils";
 
 Backbone.sync = function(method, model) {
     return false;
 };
 
 
-const output = new ConditionCollection(testCovOutputData);
+//const output = new ConditionCollection(testCovOutputData);
 //console.log(output.toJSON());
-
-const testCovenantCollection = new CovenantCollection(testCovData);
+//const testCovenantCollection = new CovenantCollection(testCovData);
 const initialCovenantCollection = new CovenantCollection();
 
 covenantListView.toElement().appendTo(".layout.default .covenant-list-container");
@@ -39,15 +39,24 @@ $("#to-output").click(() => {
 });
 
 $("#load").click(() => {
-    $("#output").val("");
-    covenantListView.setModel(testCovenantCollection);
-    curModel = testCovenantCollection;
+    uploadFile().done(function(content) {
+        const covenantData = JSON.parse(content);
+
+        try {
+            const covenantModel = new CovenantCollection(covenantData);
+            covenantListView.setModel(covenantModel);
+            curModel = covenantModel;
+        } catch (e) {
+            console.log("Error while creating CovenantCollection from JSON");
+        }
+    });
 });
 
-window.out = output;
+$("#download").click(() => {
+    const jsonData = JSON.stringify(
+        curModel.toJSON(),
+        null,
+        2);
 
-window.doRun = function() {
-    console.log(renderCovenant(
-        testCovenantCollection.get("ОГР_ЗАИСТВ"),
-        output.get("ОГР_ЗАИСТВ")));
-};
+    downloadFile("covenants.json", jsonData);
+});

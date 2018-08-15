@@ -121,6 +121,10 @@ function renderCovenantUI(covenantMetaModel) {
             "<div style='margin-top: 10px;'><textarea style='width: 99%; height: 300px;'></textarea></div>" +
             "<div style='margin-top: 10px;'>" +
                 "<button class='do-print'>Вывести текст</button>" +
+                "<select class='templatePropertyName'>" +
+                    "<option value='cdTemplate'>ПРКО</option>" +
+                    "<option value='oTemplate'>КОД</option>" +
+                "</select>" +
                 "<button class='do-refresh'>Обновить</button>" +
             "</div>" +
         "</div>");
@@ -154,7 +158,10 @@ function renderCovenantUI(covenantMetaModel) {
             });
 
             const conditionModel = new ConditionModel(userInput);
-            const text = renderCovenant(covenantMetaModel, conditionModel);
+            const templatePropertyName = view
+                .find("select.templatePropertyName")
+                .val();
+            const text = renderCovenant(covenantMetaModel, conditionModel, templatePropertyName);
             view.find("textarea").val(text);
         });
 

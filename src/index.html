@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Редактор ковенант</title>
+    <script type="application/javascript" src="dicts.js"></script>
 </head>
 <body>
     <div class="layout default container">
@@ -26,6 +27,9 @@
             <div style="margin-top: 20px;">
                 <textarea id="output" style="width: 99%; height: 400px;"></textarea>
             </div>
+            <!--<div style="margin-top: 20px;">
+                <textarea id="dictSrc" style="width: 99%; height: 400px;"></textarea>
+            </div>-->
         </div>
     </div>
 
@@ -237,6 +241,12 @@
         <div class="ui-component attribute-value-date">
             <!--<input type="text" class="date-value" />&nbsp;(incomplete)-->
             Date
+        </div>
+    </script>
+
+    <script id="attribute-value-period" type="text/html">
+        <div class="ui-component attribute-value-period">
+            <div>Период: <input type="text" class="period" />&nbsp;Единицы измерения: <select class="unit"></select></div>
         </div>
     </script>
 </body>

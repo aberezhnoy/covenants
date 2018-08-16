@@ -3,6 +3,7 @@ import SystemDictionary from "../resources/system";
 import Currency from "../resources/currency";
 import Covenants from "../resources/covenants";
 import ExternalDictionaries from "../resources/external-dict";
+import _ from "underscore";
 
 const ValueTypesDict = new Dictionary(SystemDictionary["valueTypes"]);
 const ComponentTypesDict = new Dictionary(SystemDictionary["componentTypes"]);
@@ -38,7 +39,13 @@ function getExternalDictionary(type) {
     }
 }
 
-const ExternalDictionariesDict = new Dictionary(ExternalDictionaries["list"]);
+let dictData = ExternalDictionaries["list"];
+
+if (window._dicts && _.isArray(window._dicts)) {
+    dictData = dictData.concat(window._dicts);
+}
+
+const ExternalDictionariesDict = new Dictionary(dictData);
 
 export {
     ValueTypesDict,

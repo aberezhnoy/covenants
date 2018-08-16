@@ -33,6 +33,22 @@ const attributeRenderers = {
         const currencyDictItem = currencyDict.get(amount.currency);
 
         return amount.amount + " " + renderDict(currencyDictItem, templateProperty);
+    },
+
+    "DATE": function(attributeMetaModel, attributeModel, templateProperty) {
+        return "date undone";
+    },
+
+    "PERIOD": function(attributeMetaModel, attributeModel, templateProperty) {
+        const period = attributeModel.get("value");
+        const dict = getExternalDictionary("PERIOD_UNIT");
+        const dictItem = dict.get(period.unit);
+
+        return period.period + " " + renderDict(dictItem, templateProperty);
+    },
+
+    "SCALAR": function(attributeMetaModel, attributeModel, templateProperty) {
+        return attributeModel.get("value");
     }
 };
 

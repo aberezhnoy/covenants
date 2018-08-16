@@ -5,13 +5,13 @@
     "cdTemplate": "руб"
   },
   {
-    "title": "$",
+    "title": "Доллары",
     "value": "USD",
     "cdTemplate": "$"
   },
   {
-    "title": "Фунты",
-    "value": "GBP",
-    "cdTemplate": "фунт."
+    "title": "Евро",
+    "value": "EUR",
+    "cdTemplate": "€"
   }
 ]

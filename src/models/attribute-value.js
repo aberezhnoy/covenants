@@ -91,12 +91,26 @@ class AmountValueAttributeModel extends BaseValueAttributeModel {
     }
 }
 
+const TYPE_PERIOD = "PERIOD";
+
+class PeriodValueAttributeModel extends BaseValueAttributeModel {
+    defaults() {
+        return {
+            ...super.defaults(),
+            type: TYPE_PERIOD,
+            period: 0,
+            unit: "DAY"
+        };
+    }
+}
+
 const valueAttributeModelTypes = {
     [TYPE_SCALAR]: ScalarValueAttributeModel,
     [TYPE_PERCENTAGE]: PercentageValueAttributeModel,
     [TYPE_DATE]: DateValueAttributeModel,
     [TYPE_DICT]: DictionaryValueAttributeModel,
-    [TYPE_AMOUNT]: AmountValueAttributeModel };
+    [TYPE_AMOUNT]: AmountValueAttributeModel,
+    [TYPE_PERIOD]: PeriodValueAttributeModel };
 
 const ValueAttributeModelTypesDict = new Dictionary(
     _.keys(valueAttributeModelTypes)
@@ -114,11 +128,13 @@ export {
     PercentageValueAttributeModel,
     DateValueAttributeModel,
     DictionaryValueAttributeModel,
+    PeriodValueAttributeModel,
 
     TYPE_DICT,
     TYPE_DATE,
     TYPE_PERCENTAGE,
     TYPE_SCALAR,
     TYPE_AMOUNT,
+    TYPE_PERIOD,
 
     valueAttributeModelTypes};

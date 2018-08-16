@@ -5,8 +5,9 @@ import {
     TYPE_AMOUNT,
     TYPE_DATE,
     TYPE_DICT,
-    TYPE_PERCENTAGE,
-    TYPE_SCALAR } from "../models/attribute-value";
+    TYPE_PERCENTAGE, TYPE_PERIOD,
+    TYPE_SCALAR
+} from "../models/attribute-value";
 import { renderSelect } from "../input-data-bind";
 import { getExternalDictionary } from "../dao/dictionaries";
 import { renderCovenant } from "./client-renderer";
@@ -46,6 +47,11 @@ function getAttributeValue(view, componentValueMetaModel, attrMetaModel) {
             dict: attrMetaModel.get("dict"),
             value: inputViews.val()
         };
+    } else if (type === TYPE_PERIOD) {
+        res = {
+            period: parseNumber(inputViews.filter("input").val()),
+            unit: inputViews.filter("select").val()
+        }
     }
 
     return res;
@@ -291,6 +297,13 @@ function renderValueAttributeUI(componentValueMetaModel, valueAttributeMetaModel
         view.append("<input type='text' name='" + filedName + "' /> &percnt;");
     } else if (type === TYPE_SCALAR) {
         view.append("<input type='text' name='" + filedName + "' />");
+    } else if (type === TYPE_PERIOD) {
+        view.append(
+            "<input name='" + filedName + ".period' />" +
+            "<select name='" + filedName + ".unit'></select>");
+
+        const dict = getExternalDictionary("PERIOD_UNIT");
+        renderSelect(view.find("select"), dict);
     } else {
         console.log("unknown ");
     }

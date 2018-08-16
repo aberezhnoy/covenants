@@ -1,6 +1,35 @@
 import $ from "jquery";
 import { Collection, Model } from 'backbone';
 
+const valueTransformers = {
+    "default": function(val) {
+        return val;
+    },
+
+    "int": function(val) {
+        return parseInt(val, 10);
+    },
+
+    "float": function(val) {
+        return parseFloat(val);
+    }
+};
+
+function transformValue(val, type) {
+    let tr;
+
+    if (!type) {
+        tr = valueTransformers["default"];
+    } else {
+        tr = valueTransformers[type];
+        if (!tr) {
+            tr = valueTransformers["default"];
+        }
+    }
+
+    return tr(val);
+}
+
 function renderSelect(elem, collection) {
     let optionList = collection.map(function(item) {
         return new Option(item.get("title"), item.get("value"));
@@ -31,7 +60,7 @@ function unbindDictionary(elem, collection) {
     collection.off("update", null, elem);
 }
 
-function bindInputText(elem, model, propName) {
+function bindInputText(elem, model, propName, type) {
     if (!(model instanceof Model)) {
         throw "Could't bind not a model to `Text`";
     }
@@ -50,7 +79,7 @@ function bindInputText(elem, model, propName) {
 
     elem._changeHandler = () => {
         silent = true;
-        model.set(propName, $elem.val());
+        model.set(propName, transformValue($elem.val(), type));
     };
 
     $elem
@@ -70,8 +99,8 @@ function unbindInputText(elem, model, propName) {
     model.off("change:" + propName, null, elem);
 }
 
-const bindInputValue = function(elem, model, propName) {
-    return bindInputText(elem, model, propName);
+const bindInputValue = function(elem, model, propName, type) {
+    return bindInputText(elem, model, propName, type);
 };
 
 const unbindInputValue = function(elem, model, propName) {

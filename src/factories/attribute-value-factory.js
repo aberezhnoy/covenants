@@ -3,6 +3,7 @@ import AmountAttributeValue from "../view/attribute-editor/values/amount";
 import PercentageAttributeValue from "../view/attribute-editor/values/percentage";
 import DictionaryAttributeValue from "../view/attribute-editor/values/dictionary";
 import DateAttributeValue from "../view/attribute-editor/values/date";
+import PeriodAttributeValue from "../view/attribute-editor/values/period";
 
 import { valueAttributeModelTypes } from "../models/attribute-value";
 
@@ -11,15 +12,16 @@ import {
     TYPE_SCALAR,
     TYPE_PERCENTAGE,
     TYPE_DICT,
-    TYPE_AMOUNT } from "../models/attribute-value";
+    TYPE_AMOUNT,
+    TYPE_PERIOD } from "../models/attribute-value";
 
 const typeMapping = {
     [TYPE_DICT]: DictionaryAttributeValue,
     [TYPE_DATE]: DateAttributeValue,
     [TYPE_SCALAR]: ScalarAttributeValue,
     [TYPE_PERCENTAGE]: PercentageAttributeValue,
-    [TYPE_AMOUNT]: AmountAttributeValue
-};
+    [TYPE_AMOUNT]: AmountAttributeValue,
+    [TYPE_PERIOD]: PeriodAttributeValue };
 
 
 function attributeValueFactory(model) {

@@ -54,6 +54,29 @@
         "value": "VAL_2",
         "cdTemplate": "ООО 'Группа компаний 2', адрес 2"
       }
+    ],
+
+    "PERIOD_UNIT": [
+      {
+        "title": "Дни",
+        "value": "DAY",
+        "cdTemplate": "дн"
+      },
+      {
+        "title": "Недели",
+        "value": "WEEK",
+        "cdTemplate": "нед"
+      },
+      {
+        "title": "Месяцы",
+        "value": "MONTH",
+        "cdTemplate": "мес"
+      },
+      {
+        "title": "Годы",
+        "value": "YEAR",
+        "cdTemplate": "год(а)"
+      }
     ]
   }
 }

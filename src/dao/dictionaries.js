@@ -20,16 +20,25 @@ const externalDictionariesCache = {
     "CURRENCY": CurrencyDict
 };
 
+let extDict = window._extDict || {};
+const DEFAULT_DICT = new Dictionary([
+    {
+        "title": "Default dictionary",
+        "value": "default_value"
+    }
+]);
+
 function getExternalDictionary(type) {
     const externalDict = externalDictionariesCache[type];
 
     if (externalDict && externalDict instanceof Dictionary) {
         return externalDict;
     } else {
-        const dict = ExternalDictionaries.dict[type];
+        const dict = ExternalDictionaries.dict[type] || extDict[type];
 
         if (!dict) {
-            throw "Unknown dict type: " + type;
+            //throw "Unknown dict type: " + type;
+            return DEFAULT_DICT;
         }
 
         const externalDict = new Dictionary(dict);

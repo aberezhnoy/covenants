@@ -147,5 +147,10 @@ function renderValueAttribute(attributeMetaModel, attributeModel, templateProper
     return renderer(attributeMetaModel, attributeModel, templateProperty);
 }
 
+if (window) {
+    window._cov = window._cov || {};
+    window._cov.renderCovenant = renderCovenant;
+}
+
 export {
     renderCovenant };

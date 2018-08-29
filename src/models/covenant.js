@@ -44,6 +44,11 @@ class CovenantModel extends Model {
     }
 }
 
+if (window) {
+    window._cov = window._cov || {};
+    window._cov.CovenantModel = CovenantModel;
+}
+
 export {
     CovenantModel,
     ComponentCollection,

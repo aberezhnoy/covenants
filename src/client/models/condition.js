@@ -29,6 +29,11 @@ class ConditionModel extends Model {
     }
 }
 
+if (window) {
+    window._cov = window._cov || {};
+    window._cov.ConditionModel = ConditionModel;
+}
+
 export {
     ConditionCollection,
     ConditionModel }
